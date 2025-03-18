@@ -224,3 +224,5 @@ plt.tight_layout()
 plt.show()
 
 ```
+
+![alt text](image-2.png)
