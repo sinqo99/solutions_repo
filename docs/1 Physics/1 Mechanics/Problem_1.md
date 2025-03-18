@@ -104,6 +104,8 @@ This model is a simplified version of projectile motion, which assumes no air re
 
 Below is a Python script to simulate projectile motion and visualize the range as a function of the launch angle for different initial velocities.
 
+```python
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -138,3 +140,4 @@ plt.grid(True)
 plt.show()
 
 ![alt text](image-5.png)
+```
