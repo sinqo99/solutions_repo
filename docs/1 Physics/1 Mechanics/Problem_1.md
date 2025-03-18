@@ -11,9 +11,11 @@ In projectile motion, the only force acting on the projectile (ignoring air resi
 The horizontal and vertical motions are independent of each other. We can describe each with kinematic equations:
 
 1. **Horizontal motion (no acceleration)**:
-   \[
+
+   $$
    x(t) = v_0 \cos(\theta) \cdot t
-   \]
+   $$
+
    where:
 
    - \( v_0 \) is the initial velocity,
@@ -21,42 +23,51 @@ The horizontal and vertical motions are independent of each other. We can descri
    - \( t \) is time.
 
 2. **Vertical motion (constant acceleration due to gravity)**:
-   \[
+   $$
    y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2
-   \]
+   $$
 
 ### 1.2 Time of Flight
 
 To find the time of flight, we need to determine when the projectile hits the ground, i.e., when \( y(t) = 0 \). Using the vertical motion equation:
-\[
+
+$$
 y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2 = 0
-\]
+$$
 
 Factoring out \( t \), we get:
-\[
+
+$$
 t (v_0 \sin(\theta) - \frac{1}{2} g t) = 0
-\]
+$$
+
 The solutions are \( t = 0 \) (the initial launch) and \( t = \frac{2 v_0 \sin(\theta)}{g} \) (the time when the projectile hits the ground).
 
 Thus, the time of flight is:
-\[
+
+$$
 t_f = \frac{2 v_0 \sin(\theta)}{g}
-\]
+$$
 
 ### 1.3 Horizontal Range
 
 The horizontal range \( R \) is the distance traveled in the horizontal direction during the time of flight. From the horizontal motion equation:
-\[
+
+$$
 R = x(t_f) = v_0 \cos(\theta) \cdot t_f
-\]
+$$
+
 Substituting the expression for \( t_f \):
-\[
+
+$$
 R = v_0 \cos(\theta) \cdot \frac{2 v_0 \sin(\theta)}{g}
-\]
+$$
+
 Simplifying:
-\[
+
+$$
 R = \frac{v_0^2 \sin(2\theta)}{g}
-\]
+$$
 
 ### 1.4 Family of Solutions
 
@@ -93,30 +104,31 @@ This model is a simplified version of projectile motion, which assumes no air re
 
 Below is a Python script to simulate projectile motion and visualize the range as a function of the launch angle for different initial velocities.
 
-```python
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-g = 9.81  # Acceleration due to gravity (m/s^2)
+
+g = 9.81 # Acceleration due to gravity (m/s^2)
 
 # Function to calculate the range based on angle and initial velocity
-def calculate_range(v0, angle):
-    # Convert angle to radians
-    theta = np.radians(angle)
-    # Range formula
-    R = (v0**2 * np.sin(2*theta)) / g
-    return R
+
+def calculate_range(v0, angle): # Convert angle to radians
+theta = np.radians(angle) # Range formula
+R = (v0\*_2 _ np.sin(2\*theta)) / g
+return R
 
 # Generate data for multiple initial velocities
-initial_velocities = [20, 30, 40, 50]  # Different initial velocities in m/s
-angles = np.linspace(0, 90, 100)  # Angles from 0 to 90 degrees
+
+initial_velocities = [20, 30, 40, 50] # Different initial velocities in m/s
+angles = np.linspace(0, 90, 100) # Angles from 0 to 90 degrees
 
 # Plotting
+
 plt.figure(figsize=(10,6))
 for v0 in initial_velocities:
-    ranges = [calculate_range(v0, angle) for angle in angles]
-    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
+ranges = [calculate_range(v0, angle) for angle in angles]
+plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
 
 plt.title('Projectile Range vs Launch Angle')
 plt.xlabel('Launch Angle (degrees)')
@@ -124,4 +136,5 @@ plt.ylabel('Range (meters)')
 plt.legend()
 plt.grid(True)
 plt.show()
-```
+
+![alt text](image-5.png)
