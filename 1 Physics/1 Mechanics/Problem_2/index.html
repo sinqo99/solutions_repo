@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Investigating the Dynamics of a Forced Damped Pendulum - Physics and Mathematics</title>
+<title>PROBLEM 2 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Investigating the Dynamics of a Forced Damped Pendulum";
+        var mkdocs_page_name = "PROBLEM 2";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -48,7 +48,7 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Investigation of the Range as a Function of the Angle of Projection</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Dynamics of a Forced Damped Pendulum</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">PROBLEM 2</a>
 <ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
 <ul>
@@ -195,7 +195,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Investigating the Dynamics of a Forced Damped Pendulum</li>
+<li class="breadcrumb-item active">PROBLEM 2</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -203,7 +203,7 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
+<h1 id="problem-2">PROBLEM 2</h1>
 <h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
 <h3 id="the-forced-damped-pendulum-model">The Forced Damped Pendulum Model</h3>
 <p>The motion of a forced damped pendulum can be described by the following second-order ordinary differential equation (ODE):</p>
@@ -212,16 +212,16 @@
 \]</div>
 <p>Where:</p>
 <ul>
-<li>$\theta(t) $ is the angular displacement of the pendulum as a function of time,</li>
-<li>$\gamma $ is the damping coefficient (representing the frictional or resistive forces),</li>
-<li>$\omega_0 $ is the natural frequency of the pendulum (which depends on the length and acceleration due to gravity),</li>
-<li>$ F_0 $ is the amplitude of the external driving force,</li>
-<li>$\omega $ is the driving angular frequency, and</li>
-<li>$ t $ is time.</li>
+<li><span class="arithmatex">\( \theta(t) \)</span> is the angular displacement of the pendulum as a function of time,</li>
+<li><span class="arithmatex">\( \gamma \)</span> is the damping coefficient (representing the frictional or resistive forces),</li>
+<li><span class="arithmatex">\( \omega_0 \)</span> is the natural frequency of the pendulum (which depends on the length and acceleration due to gravity),</li>
+<li><span class="arithmatex">\( F_0 \)</span> is the amplitude of the external driving force,</li>
+<li><span class="arithmatex">\( \omega \)</span> is the driving angular frequency, and</li>
+<li><span class="arithmatex">\( t \)</span> is time.</li>
 </ul>
-<p>This equation describes the motion of the pendulum under the influence of both damping and an external periodic force. The term $2 \gamma \theta'(t) $ represents the damping force, $\omega_0^2 \theta(t) $ represents the restoring force due to gravity, and $F_0 \cos(\omega t) $ is the periodic driving force.</p>
+<p>This equation describes the motion of the pendulum under the influence of both damping and an external periodic force. The term <span class="arithmatex">\( 2 \gamma \theta'(t) \)</span> represents the damping force, <span class="arithmatex">\( \omega_0^2 \theta(t) \)</span> represents the restoring force due to gravity, and <span class="arithmatex">\( F_0 \cos(\omega t) \)</span> is the periodic driving force.</p>
 <h3 id="small-angle-approximation">Small-Angle Approximation</h3>
-<p>For small oscillations, we can assume that the angle $ \theta(t) $ is small enough that $ \sin(\theta(t)) \approx \theta(t) $, simplifying the equation of motion to:</p>
+<p>For small oscillations, we can assume that the angle <span class="arithmatex">\( \theta(t) \)</span> is small enough that <span class="arithmatex">\( \sin(\theta(t)) \approx \theta(t) \)</span>, simplifying the equation of motion to:</p>
 <div class="arithmatex">\[
 \theta''(t) + 2 \gamma \theta'(t) + \omega_0^2 \theta(t) = F_0 \cos(\omega t)
 \]</div>
@@ -234,7 +234,7 @@
 <p>$$
    \theta_h(t) = A e^{-\gamma t} \cos(\omega_0 t + \phi)
    $$</p>
-<p>Where $ A $ and $ \phi $ are constants determined by initial conditions, and the exponential decay factor $ e^{-\gamma t} $ represents the damping of the system over time.</p>
+<p>Where <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( \phi \)</span> are constants determined by initial conditions, and the exponential decay factor <span class="arithmatex">\( e^{-\gamma t} \)</span> represents the damping of the system over time.</p>
 <ol>
 <li><strong>Particular Solution</strong> (due to the external driving force):</li>
 </ol>
@@ -242,8 +242,8 @@
 <p>$$
    \theta_p(t) = B \cos(\omega t - \delta)
    $$</p>
-<p>Where $ B $ is the amplitude of oscillation and $ \delta $ is the phase shift between the external force and the oscillation.</p>
-<p>Substituting this into the differential equation and solving for $ B $ and $ \delta $ gives us the particular solution:</p>
+<p>Where <span class="arithmatex">\( B \)</span> is the amplitude of oscillation and <span class="arithmatex">\( \delta \)</span> is the phase shift between the external force and the oscillation.</p>
+<p>Substituting this into the differential equation and solving for <span class="arithmatex">\( B \)</span> and <span class="arithmatex">\( \delta \)</span> gives us the particular solution:</p>
 <p>$$
    B = \frac{F_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2 \gamma \omega)^2}}
    $$</p>
@@ -255,18 +255,18 @@
 \theta(t) = A e^{-\gamma t} \cos(\omega_0 t + \phi) + \frac{F_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2 \gamma \omega)^2}} \cos(\omega t - \delta)
 \]</div>
 <h3 id="resonance-conditions-and-energy-implications">Resonance Conditions and Energy Implications</h3>
-<p>Resonance occurs when the driving frequency $ \omega $ matches the natural frequency $ \omega_0 $ of the pendulum. At resonance, the amplitude of oscillation $ B $ becomes large because the denominator in the expression for $ B $ becomes very small. In practice, resonance results in the system absorbing maximum energy from the external driving force.</p>
+<p>Resonance occurs when the driving frequency <span class="arithmatex">\( \omega \)</span> matches the natural frequency <span class="arithmatex">\( \omega_0 \)</span> of the pendulum. At resonance, the amplitude of oscillation <span class="arithmatex">\( B \)</span> becomes large because the denominator in the expression for <span class="arithmatex">\( B \)</span> becomes very small. In practice, resonance results in the system absorbing maximum energy from the external driving force.</p>
 <p>The energy absorbed by the system at resonance can be significant, and the oscillation amplitude grows, potentially leading to large motions. This behavior is especially important in engineering, where resonance must be avoided in structures like bridges and buildings to prevent catastrophic failure.</p>
 <hr/>
 <h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
 <h3 id="influence-of-damping-coefficient-driving-amplitude-and-frequency">Influence of Damping Coefficient, Driving Amplitude, and Frequency</h3>
 <ul>
-<li><strong>Damping Coefficient ($ \gamma $):</strong></li>
-<li>As $ \gamma $ increases, the system's oscillations decay more rapidly, reducing the amplitude of oscillation. High damping can suppress resonance effects, limiting the system's ability to oscillate at high amplitudes.</li>
-<li><strong>Driving Amplitude ($ F_0 $):</strong></li>
-<li>Increasing $ F_0 $ increases the amplitude of the system’s steady-state oscillations. However, at very high $ F_0 $, the system may exhibit nonlinear behavior, and the simple harmonic approximation may no longer be valid.</li>
-<li><strong>Driving Frequency ($ \omega $):</strong></li>
-<li>The driving frequency affects the resonance condition. If $ \omega $ is close to $ \omega_0 $, resonance occurs, and the amplitude of oscillations becomes large. Away from resonance, the amplitude decreases.</li>
+<li><strong>Damping Coefficient (<span class="arithmatex">\( \gamma \)</span>):</strong></li>
+<li>As <span class="arithmatex">\( \gamma \)</span> increases, the system's oscillations decay more rapidly, reducing the amplitude of oscillation. High damping can suppress resonance effects, limiting the system's ability to oscillate at high amplitudes.</li>
+<li><strong>Driving Amplitude (<span class="arithmatex">\( F_0 \)</span>):</strong></li>
+<li>Increasing <span class="arithmatex">\( F_0 \)</span> increases the amplitude of the system’s steady-state oscillations. However, at very high <span class="arithmatex">\( F_0 \)</span>, the system may exhibit nonlinear behavior, and the simple harmonic approximation may no longer be valid.</li>
+<li><strong>Driving Frequency (<span class="arithmatex">\( \omega \)</span>):</strong></li>
+<li>The driving frequency affects the resonance condition. If <span class="arithmatex">\( \omega \)</span> is close to <span class="arithmatex">\( \omega_0 \)</span>, resonance occurs, and the amplitude of oscillations becomes large. Away from resonance, the amplitude decreases.</li>
 </ul>
 <h3 id="transition-from-regular-to-chaotic-motion">Transition from Regular to Chaotic Motion</h3>
 <p>As the driving amplitude or frequency is varied, the system can transition from regular periodic oscillations to chaotic motion. This can be characterized by sensitivity to initial conditions, where small changes in initial displacement or velocity lead to dramatically different behavior over time. The transition to chaos can be studied using <strong>bifurcation diagrams</strong> and <strong>Poincaré sections</strong>.</p>
@@ -300,7 +300,7 @@ v'(t) = -2 \gamma v(t) - \omega_0^2 \theta(t) + F_0 \cos(\omega t)
 <p>Using a method like the <strong>Runge-Kutta 4th order method</strong>, we can integrate these equations over time and observe the system's behavior under different conditions.</p>
 <h3 id="phase-diagrams-and-poincare-sections">Phase Diagrams and Poincaré Sections</h3>
 <ul>
-<li><strong>Phase Diagram:</strong> Plot $ \theta(t) $ vs. $ v(t) $ (angular velocity), which shows the system’s trajectory in phase space.</li>
+<li><strong>Phase Diagram:</strong> Plot <span class="arithmatex">\( \theta(t) \)</span> vs. <span class="arithmatex">\( v(t) \)</span> (angular velocity), which shows the system’s trajectory in phase space.</li>
 <li><strong>Poincaré Section:</strong> A plot of the system's state at periodic intervals (e.g., every time the pendulum passes through the equilibrium position) to visualize the onset of chaotic behavior.</li>
 </ul>
 <hr/>
@@ -392,7 +392,7 @@ plt.grid(True)</p>
 <h1 id="show-the-plots">Show the plots</h1>
 <p>plt.tight_layout()
 plt.show()</p>
-<p><img alt="alt text" src="../image-6.png"/></p>
+<p><img alt="alt text" src="../image-7.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
