@@ -156,28 +156,24 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 # Constants
-
-gamma = 0.1 # Damping coefficient
-omega_0 = 2.0 # Natural frequency of the pendulum
-F_0 = 1.0 # Driving force amplitude
-omega = 1.8 # Driving frequency
-t_span = (0, 50) # Time span for simulation (start, end)
-initial_conditions = [0.1, 0] # Initial conditions: [theta(0), omega(0)]
+gamma = 0.1  # Damping coefficient
+omega_0 = 2.0  # Natural frequency of the pendulum
+F_0 = 1.0  # Driving force amplitude
+omega = 1.8  # Driving frequency
+t_span = (0, 50)  # Time span for simulation (start, end)
+initial_conditions = [0.1, 0]  # Initial conditions: [theta(0), omega(0)]
 
 # Define the system of differential equations
-
 def forced_damped_pendulum(t, y):
-theta, omega = y
-dtheta_dt = omega
-domega_dt = -2 _ gamma _ omega - omega_0\*_2 _ theta + F_0 _ np.cos(omega _ t)
-return [dtheta_dt, domega_dt]
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -2 * gamma * omega - omega_0**2 * theta + F_0 * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]
 
 # Solve the differential equation using the Runge-Kutta method
-
 sol = solve_ivp(forced_damped_pendulum, t_span, initial_conditions, t_eval=np.linspace(t_span[0], t_span[1], 10000))
 
 # Extract the solution
-
 time = sol.t
 theta = sol.y[0]
 omega = sol.y[1]
@@ -185,7 +181,6 @@ omega = sol.y[1]
 # Plot the results
 
 # Plot Angular Displacement vs Time
-
 plt.figure(figsize=(12, 6))
 plt.subplot(2, 2, 1)
 plt.plot(time, theta, label="Angular Displacement (theta)")
@@ -195,7 +190,6 @@ plt.ylabel("Theta [rad]")
 plt.grid(True)
 
 # Plot Angular Velocity vs Time
-
 plt.subplot(2, 2, 2)
 plt.plot(time, omega, label="Angular Velocity (omega)", color='orange')
 plt.title("Angular Velocity vs Time")
@@ -204,7 +198,6 @@ plt.ylabel("Omega [rad/s]")
 plt.grid(True)
 
 # Phase Plot (theta vs omega)
-
 plt.subplot(2, 2, 3)
 plt.plot(theta, omega, label="Phase Plot")
 plt.title("Phase Plot (Theta vs Omega)")
@@ -213,9 +206,8 @@ plt.ylabel("Omega [rad/s]")
 plt.grid(True)
 
 # Poincaré Section (plot at theta = 0)
-
-poincare_section = theta[theta[:-1] _ theta[1:] < 0]
-poincare_omega = omega[:-1]theta[:-1] _ theta[1:] < 0]
+poincare_section = theta[theta[:-1] * theta[1:] < 0]
+poincare_omega = omega[:-1][theta[:-1] * theta[1:] < 0]
 
 plt.subplot(2, 2, 4)
 plt.plot(poincare_section, poincare_omega, 'o', label="Poincaré Section")
@@ -225,8 +217,7 @@ plt.ylabel("Omega [rad/s]")
 plt.grid(True)
 
 # Show the plots
-
 plt.tight_layout()
 plt.show()
 
-![alt text](image-7.png)
+![alt text](image-1.png)
