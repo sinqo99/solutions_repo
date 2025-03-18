@@ -202,54 +202,52 @@
 <p>In projectile motion, the only force acting on the projectile (ignoring air resistance) is gravity, which accelerates the object downward with a constant acceleration, <span class="arithmatex">\( g \)</span>.</p>
 <p>The horizontal and vertical motions are independent of each other. We can describe each with kinematic equations:</p>
 <ol>
-<li>
-<p><strong>Horizontal motion (no acceleration)</strong>:
-   [
+<li><strong>Horizontal motion (no acceleration)</strong>:</li>
+</ol>
+<p>$$
    x(t) = v_0 \cos(\theta) \cdot t
-   ]
-   where:</p>
-</li>
-<li>
-<p><span class="arithmatex">\( v_0 \)</span> is the initial velocity,</p>
-</li>
+   $$</p>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\( v_0 \)</span> is the initial velocity,</li>
 <li><span class="arithmatex">\( \theta \)</span> is the angle of projection,</li>
 <li>
 <p><span class="arithmatex">\( t \)</span> is time.</p>
 </li>
 <li>
 <p><strong>Vertical motion (constant acceleration due to gravity)</strong>:
-   [
+   $$
    y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2
-   ]</p>
+   $$</p>
 </li>
-</ol>
+</ul>
 <h3 id="12-time-of-flight">1.2 Time of Flight</h3>
-<p>To find the time of flight, we need to determine when the projectile hits the ground, i.e., when <span class="arithmatex">\( y(t) = 0 \)</span>. Using the vertical motion equation:
-[
+<p>To find the time of flight, we need to determine when the projectile hits the ground, i.e., when <span class="arithmatex">\( y(t) = 0 \)</span>. Using the vertical motion equation:</p>
+<div class="arithmatex">\[
 y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2 = 0
-]</p>
-<p>Factoring out <span class="arithmatex">\( t \)</span>, we get:
-[
+\]</div>
+<p>Factoring out <span class="arithmatex">\( t \)</span>, we get:</p>
+<div class="arithmatex">\[
 t (v_0 \sin(\theta) - \frac{1}{2} g t) = 0
-]
-The solutions are <span class="arithmatex">\( t = 0 \)</span> (the initial launch) and <span class="arithmatex">\( t = \frac{2 v_0 \sin(\theta)}{g} \)</span> (the time when the projectile hits the ground).</p>
-<p>Thus, the time of flight is:
-[
+\]</div>
+<p>The solutions are <span class="arithmatex">\( t = 0 \)</span> (the initial launch) and <span class="arithmatex">\( t = \frac{2 v_0 \sin(\theta)}{g} \)</span> (the time when the projectile hits the ground).</p>
+<p>Thus, the time of flight is:</p>
+<div class="arithmatex">\[
 t_f = \frac{2 v_0 \sin(\theta)}{g}
-]</p>
+\]</div>
 <h3 id="13-horizontal-range">1.3 Horizontal Range</h3>
-<p>The horizontal range <span class="arithmatex">\( R \)</span> is the distance traveled in the horizontal direction during the time of flight. From the horizontal motion equation:
-[
+<p>The horizontal range <span class="arithmatex">\( R \)</span> is the distance traveled in the horizontal direction during the time of flight. From the horizontal motion equation:</p>
+<div class="arithmatex">\[
 R = x(t_f) = v_0 \cos(\theta) \cdot t_f
-]
-Substituting the expression for <span class="arithmatex">\( t_f \)</span>:
-[
+\]</div>
+<p>Substituting the expression for <span class="arithmatex">\( t_f \)</span>:</p>
+<div class="arithmatex">\[
 R = v_0 \cos(\theta) \cdot \frac{2 v_0 \sin(\theta)}{g}
-]
-Simplifying:
-[
+\]</div>
+<p>Simplifying:</p>
+<div class="arithmatex">\[
 R = \frac{v_0^2 \sin(2\theta)}{g}
-]</p>
+\]</div>
 <h3 id="14-family-of-solutions">1.4 Family of Solutions</h3>
 <p>This equation shows how the range <span class="arithmatex">\( R \)</span> depends on the initial velocity <span class="arithmatex">\( v_0 \)</span>, the gravitational acceleration <span class="arithmatex">\( g \)</span>, and the launch angle <span class="arithmatex">\( \theta \)</span>. The term <span class="arithmatex">\( \sin(2\theta) \)</span> shows that the range is maximized when <span class="arithmatex">\( \theta = 45^\circ \)</span> because <span class="arithmatex">\( \sin(90^\circ) = 1 \)</span>.</p>
 <p>Thus, for a given <span class="arithmatex">\( v_0 \)</span> and <span class="arithmatex">\( g \)</span>, the range depends on the launch angle. The solution also highlights that the range is symmetric: for any angle <span class="arithmatex">\( \theta \)</span>, there is a complementary angle <span class="arithmatex">\( 90^\circ - \theta \)</span> that gives the same range.</p>
@@ -276,37 +274,30 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 </ul>
 <h2 id="4-implementation">4. Implementation</h2>
 <p>Below is a Python script to simulate projectile motion and visualize the range as a function of the launch angle for different initial velocities.</p>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-g = 9.81  # Acceleration due to gravity (m/s^2)
-
-# Function to calculate the range based on angle and initial velocity
-def calculate_range(v0, angle):
-    # Convert angle to radians
-    theta = np.radians(angle)
-    # Range formula
-    R = (v0**2 * np.sin(2*theta)) / g
-    return R
-
-# Generate data for multiple initial velocities
-initial_velocities = [20, 30, 40, 50]  # Different initial velocities in m/s
-angles = np.linspace(0, 90, 100)  # Angles from 0 to 90 degrees
-
-# Plotting
-plt.figure(figsize=(10,6))
+<p>import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>g = 9.81 # Acceleration due to gravity (m/s^2)</p>
+<h1 id="function-to-calculate-the-range-based-on-angle-and-initial-velocity">Function to calculate the range based on angle and initial velocity</h1>
+<p>def calculate_range(v0, angle): # Convert angle to radians
+theta = np.radians(angle) # Range formula
+R = (v0*_2 _ np.sin(2*theta)) / g
+return R</p>
+<h1 id="generate-data-for-multiple-initial-velocities">Generate data for multiple initial velocities</h1>
+<p>initial_velocities = [20, 30, 40, 50] # Different initial velocities in m/s
+angles = np.linspace(0, 90, 100) # Angles from 0 to 90 degrees</p>
+<h1 id="plotting">Plotting</h1>
+<p>plt.figure(figsize=(10,6))
 for v0 in initial_velocities:
-    ranges = [calculate_range(v0, angle) for angle in angles]
-    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
-
-plt.title('Projectile Range vs Launch Angle')
+ranges = [calculate_range(v0, angle) for angle in angles]
+plt.plot(angles, ranges, label=f'v0 = {v0} m/s')</p>
+<p>plt.title('Projectile Range vs Launch Angle')
 plt.xlabel('Launch Angle (degrees)')
 plt.ylabel('Range (meters)')
 plt.legend()
 plt.grid(True)
-plt.show()
-</code></pre>
+plt.show()</p>
+<p><img alt="alt text" src="../image-5.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
