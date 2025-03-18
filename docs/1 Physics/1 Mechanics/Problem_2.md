@@ -1,4 +1,4 @@
-# Investigating the Dynamics of a Forced Damped Pendulum
+# PROBLEM 2
 
 ## 1. Theoretical Foundation
 
@@ -12,18 +12,18 @@ $$
 
 Where:
 
-- $\theta(t) $ is the angular displacement of the pendulum as a function of time,
-- $\gamma $ is the damping coefficient (representing the frictional or resistive forces),
-- $\omega_0 $ is the natural frequency of the pendulum (which depends on the length and acceleration due to gravity),
-- $ F_0 $ is the amplitude of the external driving force,
-- $\omega $ is the driving angular frequency, and
-- $ t $ is time.
+- \( \theta(t) \) is the angular displacement of the pendulum as a function of time,
+- \( \gamma \) is the damping coefficient (representing the frictional or resistive forces),
+- \( \omega_0 \) is the natural frequency of the pendulum (which depends on the length and acceleration due to gravity),
+- \( F_0 \) is the amplitude of the external driving force,
+- \( \omega \) is the driving angular frequency, and
+- \( t \) is time.
 
-This equation describes the motion of the pendulum under the influence of both damping and an external periodic force. The term $2 \gamma \theta'(t) $ represents the damping force, $\omega_0^2 \theta(t) $ represents the restoring force due to gravity, and $F_0 \cos(\omega t) $ is the periodic driving force.
+This equation describes the motion of the pendulum under the influence of both damping and an external periodic force. The term \( 2 \gamma \theta'(t) \) represents the damping force, \( \omega_0^2 \theta(t) \) represents the restoring force due to gravity, and \( F_0 \cos(\omega t) \) is the periodic driving force.
 
 ### Small-Angle Approximation
 
-For small oscillations, we can assume that the angle $ \theta(t) $ is small enough that $ \sin(\theta(t)) \approx \theta(t) $, simplifying the equation of motion to:
+For small oscillations, we can assume that the angle \( \theta(t) \) is small enough that \( \sin(\theta(t)) \approx \theta(t) \), simplifying the equation of motion to:
 
 $$
 \theta''(t) + 2 \gamma \theta'(t) + \omega_0^2 \theta(t) = F_0 \cos(\omega t)
@@ -41,7 +41,7 @@ The general solution to the equation consists of two parts:
    \theta_h(t) = A e^{-\gamma t} \cos(\omega_0 t + \phi)
    $$
 
-   Where $ A $ and $ \phi $ are constants determined by initial conditions, and the exponential decay factor $ e^{-\gamma t} $ represents the damping of the system over time.
+   Where \( A \) and \( \phi \) are constants determined by initial conditions, and the exponential decay factor \( e^{-\gamma t} \) represents the damping of the system over time.
 
 2. **Particular Solution** (due to the external driving force):
 
@@ -51,9 +51,9 @@ The general solution to the equation consists of two parts:
    \theta_p(t) = B \cos(\omega t - \delta)
    $$
 
-   Where $ B $ is the amplitude of oscillation and $ \delta $ is the phase shift between the external force and the oscillation.
+   Where \( B \) is the amplitude of oscillation and \( \delta \) is the phase shift between the external force and the oscillation.
 
-   Substituting this into the differential equation and solving for $ B $ and $ \delta $ gives us the particular solution:
+   Substituting this into the differential equation and solving for \( B \) and \( \delta \) gives us the particular solution:
 
    $$
    B = \frac{F_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2 \gamma \omega)^2}}
@@ -71,7 +71,7 @@ $$
 
 ### Resonance Conditions and Energy Implications
 
-Resonance occurs when the driving frequency $ \omega $ matches the natural frequency $ \omega_0 $ of the pendulum. At resonance, the amplitude of oscillation $ B $ becomes large because the denominator in the expression for $ B $ becomes very small. In practice, resonance results in the system absorbing maximum energy from the external driving force.
+Resonance occurs when the driving frequency \( \omega \) matches the natural frequency \( \omega_0 \) of the pendulum. At resonance, the amplitude of oscillation \( B \) becomes large because the denominator in the expression for \( B \) becomes very small. In practice, resonance results in the system absorbing maximum energy from the external driving force.
 
 The energy absorbed by the system at resonance can be significant, and the oscillation amplitude grows, potentially leading to large motions. This behavior is especially important in engineering, where resonance must be avoided in structures like bridges and buildings to prevent catastrophic failure.
 
@@ -81,12 +81,12 @@ The energy absorbed by the system at resonance can be significant, and the oscil
 
 ### Influence of Damping Coefficient, Driving Amplitude, and Frequency
 
-- **Damping Coefficient ($ \gamma $):**
-  - As $ \gamma $ increases, the system's oscillations decay more rapidly, reducing the amplitude of oscillation. High damping can suppress resonance effects, limiting the system's ability to oscillate at high amplitudes.
-- **Driving Amplitude ($ F_0 $):**
-  - Increasing $ F_0 $ increases the amplitude of the system’s steady-state oscillations. However, at very high $ F_0 $, the system may exhibit nonlinear behavior, and the simple harmonic approximation may no longer be valid.
-- **Driving Frequency ($ \omega $):**
-  - The driving frequency affects the resonance condition. If $ \omega $ is close to $ \omega_0 $, resonance occurs, and the amplitude of oscillations becomes large. Away from resonance, the amplitude decreases.
+- **Damping Coefficient (\( \gamma \)):**
+  - As \( \gamma \) increases, the system's oscillations decay more rapidly, reducing the amplitude of oscillation. High damping can suppress resonance effects, limiting the system's ability to oscillate at high amplitudes.
+- **Driving Amplitude (\( F_0 \)):**
+  - Increasing \( F_0 \) increases the amplitude of the system’s steady-state oscillations. However, at very high \( F_0 \), the system may exhibit nonlinear behavior, and the simple harmonic approximation may no longer be valid.
+- **Driving Frequency (\( \omega \)):**
+  - The driving frequency affects the resonance condition. If \( \omega \) is close to \( \omega_0 \), resonance occurs, and the amplitude of oscillations becomes large. Away from resonance, the amplitude decreases.
 
 ### Transition from Regular to Chaotic Motion
 
@@ -127,7 +127,7 @@ Using a method like the **Runge-Kutta 4th order method**, we can integrate these
 
 ### Phase Diagrams and Poincaré Sections
 
-- **Phase Diagram:** Plot $ \theta(t) $ vs. $ v(t) $ (angular velocity), which shows the system’s trajectory in phase space.
+- **Phase Diagram:** Plot \( \theta(t) \) vs. \( v(t) \) (angular velocity), which shows the system’s trajectory in phase space.
 - **Poincaré Section:** A plot of the system's state at periodic intervals (e.g., every time the pendulum passes through the equilibrium position) to visualize the onset of chaotic behavior.
 
 ---
@@ -229,4 +229,4 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-![alt text](image-6.png)
+![alt text](image-7.png)
