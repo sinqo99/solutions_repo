@@ -151,6 +151,9 @@ Using a method like the **Runge-Kutta 4th order method**, we can integrate these
 4. **Discussion:**
    - Analysis of the limitations of the model, such as nonlinear damping, and suggestions for potential extensions (e.g., non-periodic forcing, multi-degree-of-freedom systems).
 
+```python
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
@@ -220,4 +223,4 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-![alt text](image-1.png)
+```
