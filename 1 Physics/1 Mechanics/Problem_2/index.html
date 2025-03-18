@@ -339,18 +339,18 @@ v'(t) = -2 \gamma v(t) - \omega_0^2 \theta(t) + F_0 \cos(\omega t)
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp</p>
 <h1 id="constants">Constants</h1>
-<p>gamma = 0.1 # Damping coefficient
-omega_0 = 2.0 # Natural frequency of the pendulum
-F_0 = 1.0 # Driving force amplitude
-omega = 1.8 # Driving frequency
-t_span = (0, 50) # Time span for simulation (start, end)
-initial_conditions = [0.1, 0] # Initial conditions: [theta(0), omega(0)]</p>
+<p>gamma = 0.1  # Damping coefficient
+omega_0 = 2.0  # Natural frequency of the pendulum
+F_0 = 1.0  # Driving force amplitude
+omega = 1.8  # Driving frequency
+t_span = (0, 50)  # Time span for simulation (start, end)
+initial_conditions = [0.1, 0]  # Initial conditions: [theta(0), omega(0)]</p>
 <h1 id="define-the-system-of-differential-equations">Define the system of differential equations</h1>
 <p>def forced_damped_pendulum(t, y):
-theta, omega = y
-dtheta_dt = omega
-domega_dt = -2 _ gamma _ omega - omega_0*_2 _ theta + F_0 _ np.cos(omega _ t)
-return [dtheta_dt, domega_dt]</p>
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -2 * gamma * omega - omega_0**2 * theta + F_0 * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]</p>
 <h1 id="solve-the-differential-equation-using-the-runge-kutta-method">Solve the differential equation using the Runge-Kutta method</h1>
 <p>sol = solve_ivp(forced_damped_pendulum, t_span, initial_conditions, t_eval=np.linspace(t_span[0], t_span[1], 10000))</p>
 <h1 id="extract-the-solution">Extract the solution</h1>
@@ -381,8 +381,8 @@ plt.xlabel("Theta [rad]")
 plt.ylabel("Omega [rad/s]")
 plt.grid(True)</p>
 <h1 id="poincare-section-plot-at-theta-0">Poincaré Section (plot at theta = 0)</h1>
-<p>poincare_section = theta[theta[:-1] _ theta[1:] &lt; 0]
-poincare_omega = omega[:-1]theta[:-1] _ theta[1:] &lt; 0]</p>
+<p>poincare_section = theta[theta[:-1] * theta[1:] &lt; 0]
+poincare_omega = omega[:-1][theta[:-1] * theta[1:] &lt; 0]</p>
 <p>plt.subplot(2, 2, 4)
 plt.plot(poincare_section, poincare_omega, 'o', label="Poincaré Section")
 plt.title("Poincaré Section")
@@ -392,7 +392,7 @@ plt.grid(True)</p>
 <h1 id="show-the-plots">Show the plots</h1>
 <p>plt.tight_layout()
 plt.show()</p>
-<p><img alt="alt text" src="../image-7.png"/></p>
+<p><img alt="alt text" src="../image-1.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
