@@ -274,30 +274,42 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 </ul>
 <h2 id="4-implementation">4. Implementation</h2>
 <p>Below is a Python script to simulate projectile motion and visualize the range as a function of the launch angle for different initial velocities.</p>
-<p>import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="constants">Constants</h1>
-<p>g = 9.81 # Acceleration due to gravity (m/s^2)</p>
-<h1 id="function-to-calculate-the-range-based-on-angle-and-initial-velocity">Function to calculate the range based on angle and initial velocity</h1>
-<p>def calculate_range(v0, angle): # Convert angle to radians
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+
+g = 9.81 # Acceleration due to gravity (m/s^2)
+
+# Function to calculate the range based on angle and initial velocity
+
+def calculate_range(v0, angle): # Convert angle to radians
 theta = np.radians(angle) # Range formula
-R = (v0*_2 _ np.sin(2*theta)) / g
-return R</p>
-<h1 id="generate-data-for-multiple-initial-velocities">Generate data for multiple initial velocities</h1>
-<p>initial_velocities = [20, 30, 40, 50] # Different initial velocities in m/s
-angles = np.linspace(0, 90, 100) # Angles from 0 to 90 degrees</p>
-<h1 id="plotting">Plotting</h1>
-<p>plt.figure(figsize=(10,6))
+R = (v0\*_2 _ np.sin(2\*theta)) / g
+return R
+
+# Generate data for multiple initial velocities
+
+initial_velocities = [20, 30, 40, 50] # Different initial velocities in m/s
+angles = np.linspace(0, 90, 100) # Angles from 0 to 90 degrees
+
+# Plotting
+
+plt.figure(figsize=(10,6))
 for v0 in initial_velocities:
 ranges = [calculate_range(v0, angle) for angle in angles]
-plt.plot(angles, ranges, label=f'v0 = {v0} m/s')</p>
-<p>plt.title('Projectile Range vs Launch Angle')
+plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
+
+plt.title('Projectile Range vs Launch Angle')
 plt.xlabel('Launch Angle (degrees)')
 plt.ylabel('Range (meters)')
 plt.legend()
 plt.grid(True)
-plt.show()</p>
-<p><img alt="alt text" src="../image-5.png"/></p>
+plt.show()
+
+![alt text](image-5.png)
+</code></pre>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
