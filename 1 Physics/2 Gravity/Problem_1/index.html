@@ -172,6 +172,149 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="orbital-period-and-orbital-radius-a-manual">Orbital Period and Orbital Radius: A Manual</h1>
+<h2 id="motivation"><strong>Motivation</strong></h2>
+<p>Kepler's Third Law states that the square of a planet's orbital period (T) is proportional to the cube of its orbital radius (R):</p>
+<div class="arithmatex">\[
+T^2 \propto R^3
+\]</div>
+<p>This law helps determine planetary motions, celestial masses, and gravitational interactions across different astronomical systems.</p>
+<hr/>
+<h2 id="derivation-of-keplers-third-law"><strong>Derivation of Kepler's Third Law</strong></h2>
+<p>For a circular orbit, the gravitational force provides the necessary centripetal force:</p>
+<div class="arithmatex">\[
+\frac{G M m}{R^2} = \frac{m v^2}{R}
+\]</div>
+<p>Canceling <span class="arithmatex">\( m \)</span> and solving for <span class="arithmatex">\( v \)</span>:</p>
+<div class="arithmatex">\[
+v^2 = \frac{G M}{R}
+\]</div>
+<p>Expressing velocity in terms of the orbital period:</p>
+<div class="arithmatex">\[
+v = \frac{2 \pi R}{T} \Rightarrow \frac{4 \pi^2 R^2}{T^2} = \frac{G M}{R}
+\]</div>
+<p>Rearranging:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4 \pi^2 R^3}{G M}
+\]</div>
+<p>This confirms that <span class="arithmatex">\( T^2 \)</span> is proportional to <span class="arithmatex">\( R^3 \)</span>.</p>
+<hr/>
+<h2 id="implications-in-astronomy"><strong>Implications in Astronomy</strong></h2>
+<ul>
+<li><strong>Mass Calculation</strong>: Used to determine the mass of stars and planets.</li>
+<li><strong>Satellite Orbits</strong>: Governs artificial and natural satellite motion.</li>
+<li><strong>Binary Systems</strong>: Helps estimate masses of orbiting stars.</li>
+</ul>
+<hr/>
+<h2 id="real-world-examples"><strong>Real-World Examples</strong></h2>
+<h3 id="earths-orbit-around-the-sun"><strong>Earth’s Orbit Around the Sun</strong></h3>
+<ul>
+<li><span class="arithmatex">\( R = 1.496 \times 10^{11} \)</span> m, <span class="arithmatex">\( T \approx 365.25 \)</span> days</li>
+<li>Verifies the Sun’s mass using Kepler’s Law.</li>
+</ul>
+<h3 id="moons-orbit-around-earth"><strong>Moon’s Orbit Around Earth</strong></h3>
+<ul>
+<li><span class="arithmatex">\( R = 3.844 \times 10^8 \)</span> m, <span class="arithmatex">\( T = 27.3 \)</span> days</li>
+<li>Determines Earth’s mass from lunar motion.</li>
+</ul>
+<hr/>
+<h2 id="graphical-representation"><strong>Graphical Representation</strong></h2>
+<ul>
+<li><strong>Plot of <span class="arithmatex">\( T^2 \)</span> vs. <span class="arithmatex">\( R^3 \)</span></strong>: Confirms linear proportionality.</li>
+<li><strong>Orbit Simulation</strong>: Visualizes circular orbital motion.</li>
+</ul>
+<hr/>
+<h2 id="extension-to-elliptical-orbits"><strong>Extension to Elliptical Orbits</strong></h2>
+<p>For elliptical orbits, the semi-major axis <span class="arithmatex">\( a \)</span> replaces <span class="arithmatex">\( R \)</span>:</p>
+<div class="arithmatex">\[
+T^2 \propto a^3
+\]</div>
+<p>This applies to comets, exoplanets, and non-circular orbits.</p>
+<hr/>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>Kepler’s Third Law is fundamental in celestial mechanics, enabling:</p>
+<ul>
+<li>Prediction of planetary positions,</li>
+<li>Calculation of celestial masses,</li>
+<li>Design of satellite trajectories.</li>
+</ul>
+<pre><code class="language-python">
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.constants import G
+
+# Constants
+M_sun = 1.989e30  # Mass of the Sun in kg
+AU = 1.496e11  # Astronomical Unit in meters
+
+def orbital_period(R, M):
+    """Calculate the orbital period using Kepler's Third Law."""
+    return np.sqrt((4 * np.pi**2 * R**3) / (G * M))
+
+# Define a range of orbital radii (multiples of AU)
+orbital_radii = np.linspace(0.1, 5, 50) * AU
+orbital_periods = orbital_period(orbital_radii, M_sun)
+
+# Compute square of periods and cube of radii
+T_squared = orbital_periods**2
+R_cubed = orbital_radii**3
+
+# Plot T^2 vs. R^3 to validate Kepler's Third Law
+plt.figure(figsize=(8, 6))
+plt.plot(R_cubed, T_squared, 'bo-', label='Simulated Data')
+plt.xlabel("Orbital Radius Cubed (R³) [m³]")
+plt.ylabel("Orbital Period Squared (T²) [s²]")
+plt.title("Kepler's Third Law: T² vs R³")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Additional plot: Log-Log scale to show proportionality
+plt.figure(figsize=(8, 6))
+plt.loglog(R_cubed, T_squared, 'ro-', label='Log-Log Relationship')
+plt.xlabel("log(R³)")
+plt.ylabel("log(T²)")
+plt.title("Kepler's Third Law in Log Scale")
+plt.legend()
+plt.grid(True, which="both", linestyle="--")
+plt.show()
+
+def plot_orbit(radius, title="Circular Orbit"):
+    """Simulate and plot a circular orbit."""
+    theta = np.linspace(0, 2*np.pi, 100)
+    x = radius * np.cos(theta)
+    y = radius * np.sin(theta)
+    lt text" style="width: 300px; height: 200px;"&gt;
+
+    plt.figure(figsize=(6, 6))
+    plt.plot(x, y, 'b-', label='Orbital Path')
+    plt.plot(0, 0, 'yo', markersize=10, label='Central Body')
+    plt.xlabel("X Position [m]")
+    plt.ylabel("Y Position [m]")
+    plt.title(title)
+    plt.legend()
+    plt.grid()
+    plt.axis('equal')
+    plt.show()
+
+# Simulate Earth's orbit around the Sun
+plot_orbit(AU, "Earth's Orbit Around the Sun")
+
+# Simulate a smaller orbit for comparison
+plot_orbit(0.5 * AU, "Smaller Orbit (0.5 AU Radius)")
+
+# Simulate a larger orbit for further comparison
+plot_orbit(2 * AU, "Larger Orbit (2 AU Radius)")
+
+# Python Code Example
+
+
+</code></pre>
+<p><img alt="alt text" src="../image-1.png"/>
+<img alt="alt text" src="../image-2.png"/>
+<img alt="alt text" src="../image-3.png"/>
+<img alt="alt text" src="../image-13.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
