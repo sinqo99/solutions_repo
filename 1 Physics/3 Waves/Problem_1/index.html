@@ -172,6 +172,185 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="wave-interference-from-multiple-sources">Wave Interference from Multiple Sources</h1>
+<h3 id="1-wave-equation-for-a-single-point-source">1. Wave Equation for a Single Point Source</h3>
+<p>A single point source at position <span class="arithmatex">\( (x_0, y_0) \)</span> emits a circular wave described by:</p>
+<div class="arithmatex">\[
+\eta(x, y, t) = \frac{A}{r} \cos(k r - \omega t + \phi)
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\( A \)</span> is the amplitude of the wave.</li>
+<li><span class="arithmatex">\( k = \frac{2\pi}{\lambda} \)</span> is the wave number, related to the wavelength <span class="arithmatex">\( \lambda \)</span>.</li>
+<li><span class="arithmatex">\( \omega = 2\pi f \)</span> is the angular frequency, where <span class="arithmatex">\( f \)</span> is the frequency.</li>
+<li><span class="arithmatex">\( r = \sqrt{(x - x_0)^2 + (y - y_0)^2} \)</span> is the distance from the source to a given point <span class="arithmatex">\( (x, y) \)</span>.</li>
+<li><span class="arithmatex">\( \phi \)</span> is the initial phase.</li>
+</ul>
+<p>This equation represents a water surface disturbance that propagates outward in circular waves, decreasing in amplitude with distance <span class="arithmatex">\( \left(\frac{1}{r}\right) \)</span> due to energy spreading.</p>
+<hr/>
+<h3 id="2-superposition-of-waves-from-multiple-sources">2. Superposition of Waves from Multiple Sources</h3>
+<p>When multiple point sources exist, the total displacement at a point <span class="arithmatex">\( (x, y) \)</span> is the sum of all individual wave contributions:</p>
+<div class="arithmatex">\[
+\eta_{\text{sum}}(x, y, t) = \sum_{i=1}^{N} \frac{A}{r_i} \cos(k r_i - \omega t + \phi_i)
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\( N \)</span> is the number of wave sources.</li>
+<li><span class="arithmatex">\( r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} \)</span> is the distance from the <span class="arithmatex">\( i \)</span>-th source to the point <span class="arithmatex">\( (x, y) \)</span>.</li>
+</ul>
+<p>Each wave contributes to the overall displacement at <span class="arithmatex">\( (x, y) \)</span>, and depending on their phase relationships, interference occurs.</p>
+<hr/>
+<h3 id="3-positioning-of-wave-sources-on-a-regular-polygon">3. Positioning of Wave Sources on a Regular Polygon</h3>
+<p>To analyze interference patterns, we position wave sources at the vertices of a regular polygon centered at the origin. The coordinates of each vertex are:</p>
+<div class="arithmatex">\[
+x_i = R \cos\left( \frac{2\pi i}{N} \right), \quad y_i = R \sin\left( \frac{2\pi i}{N} \right)
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\( R \)</span> is the radius (distance from the center to a vertex).</li>
+<li><span class="arithmatex">\( i = 0, 1, 2, \dots, N-1 \)</span> (index of each vertex).</li>
+<li><span class="arithmatex">\( N \)</span> is the number of vertices (sides of the polygon).</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><strong>Triangle (N = 3)</strong>: Three wave sources positioned at <span class="arithmatex">\( 120^\circ \)</span> intervals.</li>
+<li><strong>Square (N = 4)</strong>: Four sources positioned at <span class="arithmatex">\( 90^\circ \)</span> intervals.</li>
+<li><strong>Pentagon (N = 5)</strong>: Five sources at <span class="arithmatex">\( 72^\circ \)</span> intervals, and so on.</li>
+</ul>
+<hr/>
+<h3 id="4-understanding-interference-patterns">4. Understanding Interference Patterns</h3>
+<p>When multiple sources emit waves simultaneously, they interact in specific ways:</p>
+<h4 id="a-constructive-interference-amplification">(a) Constructive Interference (Amplification)</h4>
+<p>Occurs when waves meet in phase, reinforcing each other. This happens at points where:</p>
+<div class="arithmatex">\[
+k r_i - \omega t + \phi_i = 2\pi m, \quad m \in \mathbb{Z}
+\]</div>
+<p>These regions appear as <strong>bright</strong> or high-amplitude areas in a graphical representation.</p>
+<h4 id="b-destructive-interference-cancellation">(b) Destructive Interference (Cancellation)</h4>
+<p>Occurs when waves meet out of phase, canceling each other. This happens when:</p>
+<div class="arithmatex">\[
+k r_i - \omega t + \phi_i = (2m + 1)\pi, \quad m \in \mathbb{Z}
+\]</div>
+<p>These regions appear as <strong>dark</strong> or low-amplitude areas.</p>
+<h4 id="c-interference-patterns-based-on-polygon-type">(c) Interference Patterns Based on Polygon Type</h4>
+<p>Each polygon has a unique interference pattern due to differences in source placement:</p>
+<ul>
+<li><strong>Equilateral Triangle (N=3)</strong>: The pattern forms a <strong>six-fold symmetry</strong> with alternating constructive and destructive regions. Interference creates concentric and radial symmetry around the center.</li>
+<li><strong>Square (N=4)</strong>: The waves form a <strong>checkerboard-like pattern</strong> with alternating constructive/destructive zones. High symmetry along the diagonal and central axes.</li>
+<li><strong>Pentagon (N=5)</strong>: More complex interference with <strong>star-like patterns</strong> emerging. Interference fringes appear denser near the center.</li>
+<li><strong>Higher N (e.g., Hexagon, Octagon)</strong>: More sources lead to denser, intricate patterns. Constructive regions form <strong>spiral-like</strong> or <strong>web-like structures</strong>.</li>
+</ul>
+<hr/>
+<h3 id="5-observing-interference-patterns-graphically">5. Observing Interference Patterns Graphically</h3>
+<p>By evaluating <span class="arithmatex">\( \eta\_{\text{sum}}(x, y, t) \)</span> over a grid of <span class="arithmatex">\( (x, y) \)</span> points and plotting it as a contour map, we can visualize the interference pattern. In these plots:</p>
+<ul>
+<li><strong>Bright areas</strong> indicate constructive interference.</li>
+<li><strong>Dark areas</strong> indicate destructive interference.</li>
+</ul>
+<p>This graphical approach helps in understanding:</p>
+<ul>
+<li>How waves reinforce or cancel out.</li>
+<li>The role of phase differences in pattern formation.</li>
+<li>The impact of increasing the number of sources.</li>
+</ul>
+<hr/>
+<h3 id="conclusion">Conclusion</h3>
+<p>Interference patterns arise due to the superposition of waves from multiple sources. Different regular polygons produce distinctive and symmetrical patterns. Constructive interference creates <strong>bright regions</strong> (high amplitude), while destructive interference results in <strong>dark regions</strong> (low amplitude). By analyzing these patterns, we gain insight into wave physics, coherence, and superposition principles.</p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.animation as animation
+
+def wave_interference_polygon(sides=3, radius=5, A=1, k=2, w=2*np.pi, resolution=500, time=0):
+    """
+    Simulates wave interference from sources placed at the vertices of a regular polygon.
+
+    Parameters:
+    - sides: Number of sides of the regular polygon
+    - radius: Distance from the center to each vertex
+    - A: Amplitude of the waves
+    - k: Wave number (related to wavelength)
+    - w: Angular frequency
+    - resolution: Grid resolution for visualization
+    - time: Time instance for animation purposes
+    """
+    # Define spatial domain
+    x = np.linspace(-radius*2, radius*2, resolution)
+    y = np.linspace(-radius*2, radius*2, resolution)
+    X, Y = np.meshgrid(x, y)
+
+    # Compute source positions (polygon vertices)
+    angles = np.linspace(0, 2*np.pi, sides, endpoint=False)
+    sources = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
+
+    # Superpose waves from all sources
+    eta_sum = np.zeros_like(X)
+    for (x0, y0) in sources:
+        r = np.sqrt((X - x0)**2 + (Y - y0)**2)
+        eta_sum += A * np.cos(k * r - w * time) / np.sqrt(r + 1e-6)  # Small value avoids division by zero
+
+    # 2D Contour Plot
+    plt.figure(figsize=(8, 8))
+    plt.contourf(X, Y, eta_sum, levels=200, cmap='plasma')
+    plt.colorbar(label='Wave Amplitude')
+    plt.scatter(*zip(*sources), color='cyan', marker='o', label='Wave Sources')
+    plt.legend()
+    plt.title(f'Interference Pattern for {sides}-sided Regular Polygon')
+    plt.xlabel('X Position')
+    plt.ylabel('Y Position')
+    plt.show()
+
+    # 3D Surface Plot
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_surface(X, Y, eta_sum, cmap='viridis', edgecolor='none')
+    ax.set_title(f'3D Interference Pattern for {sides}-sided Polygon')
+    ax.set_xlabel('X Position')
+    ax.set_ylabel('Y Position')
+    ax.set_zlabel('Wave Amplitude')
+    plt.show()
+
+def animate_wave_interference(sides=3, frames=60):
+    """Creates an animated interference pattern."""
+    fig, ax = plt.subplots(figsize=(8, 8))
+
+    def update(frame):
+        ax.clear()
+        x = np.linspace(-10, 10, 500)
+        y = np.linspace(-10, 10, 500)
+        X, Y = np.meshgrid(x, y)
+        angles = np.linspace(0, 2*np.pi, sides, endpoint=False)
+        sources = [(5 * np.cos(a), 5 * np.sin(a)) for a in angles]
+
+        eta_sum = np.zeros_like(X)
+        for (x0, y0) in sources:
+            r = np.sqrt((X - x0)**2 + (Y - y0)**2)
+            eta_sum += np.cos(2 * r - 2*np.pi * frame / frames) / np.sqrt(r + 1e-6)
+
+        ax.contourf(X, Y, eta_sum, levels=100, cmap='plasma')
+        ax.scatter(*zip(*sources), color='white', marker='o')
+        ax.set_title(f'Wave Interference Animation (Frame {frame})')
+
+    ani = animation.FuncAnimation(fig, update, frames=frames, interval=100)
+    plt.show()
+
+# Example usage: Generate impressive interference patterns
+wave_interference_polygon(sides=3)
+wave_interference_polygon(sides=4)
+wave_interference_polygon(sides=5)
+
+# Run animation (uncomment below to see it)
+# animate_wave_interference(sides=4)
+
+
+</code></pre>
+<p><img alt="alt text" src="../image.png"/>
+<img alt="alt text" src="../image-1.png"/>
+<img alt="alt text" src="../image-2.png"/>
+<img alt="alt text" src="../image-3.png"/>
+<img alt="alt text" src="../image-4.png"/>
+<img alt="alt text" src="../image-5.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
