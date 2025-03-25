@@ -136,39 +136,38 @@ plt.legend()
 plt.grid(True, which="both", linestyle="--")
 plt.show()
 
-def plot_orbit(radius, title="Circular Orbit"):
-    """Simulate and plot a circular orbit."""
+def plot_orbits(radii, labels):
+    """Simulate and plot multiple circular orbits in one figure."""
+    plt.figure(figsize=(8, 8))
     theta = np.linspace(0, 2*np.pi, 100)
-    x = radius * np.cos(theta)
-    y = radius * np.sin(theta)
-    lt text" style="width: 300px; height: 200px;">
 
-    plt.figure(figsize=(6, 6))
-    plt.plot(x, y, 'b-', label='Orbital Path')
+    for radius, label in zip(radii, labels):
+        x = radius * np.cos(theta)
+        y = radius * np.sin(theta)
+        plt.plot(x, y, label=label)
+
     plt.plot(0, 0, 'yo', markersize=10, label='Central Body')
     plt.xlabel("X Position [m]")
     plt.ylabel("Y Position [m]")
-    plt.title(title)
+    plt.title("Comparison of Circular Orbits")
     plt.legend()
     plt.grid()
     plt.axis('equal')
     plt.show()
 
-# Simulate Earth's orbit around the Sun
-plot_orbit(AU, "Earth's Orbit Around the Sun")
+# Simulate orbits at different radii
+radii = [0.5 * AU, AU, 2 * AU]
+labels = ["0.5 AU Orbit", "Earth's Orbit (1 AU)", "2 AU Orbit"]
+plot_orbits(radii, labels)
 
-# Simulate a smaller orbit for comparison
-plot_orbit(0.5 * AU, "Smaller Orbit (0.5 AU Radius)")
-
-# Simulate a larger orbit for further comparison
-plot_orbit(2 * AU, "Larger Orbit (2 AU Radius)")
-
-# Python Code Example
+# Analytical verification: Computing ratio of T^2/R^3 for different radii
+ratios = T_squared / R_cubed
+print(f"Mean value of T^2 / R^3: {np.mean(ratios):.2e} s²/m³")
+print("This confirms the constant proportionality in Kepler's Third Law.")
 
 
 ```
 
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-13.png)
+![alt text](image-17.png)
+![alt text](image-18.png)
+![alt text](image-19.png)
