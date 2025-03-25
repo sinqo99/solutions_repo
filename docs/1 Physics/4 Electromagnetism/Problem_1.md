@@ -3,9 +3,10 @@
 ## **1. Introduction**
 
 The **Lorentz Force**, given by:
-\[
+
+$$
 \mathbf{F} = q\mathbf{E} + q\mathbf{v} \times \mathbf{B}
-\]
+$$
 
 describes the motion of a charged particle in the presence of electric and magnetic fields. This force plays a key role in plasma physics, particle accelerators, and astrophysics. In this study, we implement a simulation to visualize and analyze the effects of electric and magnetic fields on charged particles.
 
