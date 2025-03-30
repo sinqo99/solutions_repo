@@ -172,6 +172,339 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="equivalent-resistance-using-graph-theory">Equivalent Resistance Using Graph Theory</h1>
+<h2 id="task-1-simplified-algorithm-description">Task 1: Simplified Algorithm Description</h2>
+<h3 id="introduction">Introduction</h3>
+<p>Calculating the equivalent resistance of a circuit is fundamental in electrical engineering. While traditional methods involve iteratively applying series and parallel resistor rules, these approaches can become cumbersome for complex circuits with many components. Graph theory offers a more systematic and algorithmic approach to solving this problem.</p>
+<p>In this approach:</p>
+<ul>
+<li><strong>Nodes</strong> represent junctions in the circuit.</li>
+<li><strong>Edges</strong> represent resistors, with the resistance values as the weights of the edges.</li>
+</ul>
+<p>This document describes the algorithm for calculating the equivalent resistance of a circuit using graph theory.</p>
+<hr/>
+<h3 id="key-concepts-for-the-algorithm">Key Concepts for the Algorithm</h3>
+<h4 id="series-connection">Series Connection:</h4>
+<ul>
+<li><strong>Series connection</strong>: Resistors are connected end-to-end, and the total resistance is the sum of individual resistances.</li>
+</ul>
+<p>Formula for series resistors:</p>
+<p>$$
+  R_{eq} = R_1 + R_2 + \cdots + R_n
+  $$</p>
+<p>Example: For two resistors <span class="arithmatex">\( R_1 = 6 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 3 \, \Omega \)</span> in series:</p>
+<p>$$
+  R_{eq} = R_1 + R_2 = 6 + 3 = 9 \, \Omega
+  $$</p>
+<h4 id="parallel-connection">Parallel Connection:</h4>
+<ul>
+<li><strong>Parallel connection</strong>: Resistors have both terminals connected to the same pair of nodes, and the total resistance is found using the parallel resistance formula.</li>
+</ul>
+<p>Formula for parallel resistors:</p>
+<p>$$
+  \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n}
+  $$</p>
+<p>Example: For two resistors <span class="arithmatex">\( R_1 = 6 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 3 \, \Omega \)</span> in parallel:</p>
+<p>$$
+  \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} = \frac{1}{6} + \frac{1}{3} = \frac{1}{R_{eq}} = \frac{1}{2}
+  $$</p>
+<p>Thus, the equivalent resistance is:</p>
+<p>$$
+  R_{eq} = 2 \, \Omega
+  $$</p>
+<hr/>
+<h3 id="algorithm-description">Algorithm Description</h3>
+<p>The algorithm simplifies the circuit by <strong>iteratively reducing the graph</strong>. This reduction involves identifying series and parallel connections and simplifying them step by step until only one node remains, representing the total equivalent resistance.</p>
+<h4 id="step-1-represent-the-circuit-as-a-graph">Step 1: Represent the Circuit as a Graph</h4>
+<ul>
+<li><strong>Nodes</strong>: Each junction in the circuit is represented by a node in the graph.</li>
+<li><strong>Edges</strong>: Each resistor is represented as an edge between two nodes, with the resistance as the weight of the edge.</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>Two resistors <span class="arithmatex">\( R_1 = 6 \, \Omega \)</span> and <span class="arithmatex">\( R_2 = 3 \, \Omega \)</span> in series:</li>
+<li><span class="arithmatex">\( R_1 \)</span> is connected to node 1, and <span class="arithmatex">\( R_2 \)</span> is connected between node 2 and node 3.</li>
+<li>The graph representation has three nodes (1, 2, and 3) and two edges representing <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span>.</li>
+</ul>
+<h4 id="step-2-detect-series-and-parallel-connections">Step 2: Detect Series and Parallel Connections</h4>
+<p>We will iteratively reduce the graph by simplifying the series and parallel connections.</p>
+<h5 id="series-connections">Series Connections:</h5>
+<ul>
+<li>If two resistors are in series (i.e., connected end-to-end), combine them by adding their resistance values.</li>
+</ul>
+<p>For two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> in series, the equivalent resistance is:</p>
+<p>$$
+  R_{eq} = R_1 + R_2
+  $$</p>
+<p>This process is repeated until no more simple series connections are left.</p>
+<h5 id="parallel-connections">Parallel Connections:</h5>
+<ul>
+<li>If two resistors are in parallel (i.e., connected between the same two nodes), combine them using the parallel formula.</li>
+</ul>
+<p>For two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> in parallel, the equivalent resistance is:</p>
+<p>$$
+  \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2}
+  $$</p>
+<p>This process is repeated until no more simple parallel connections are left.</p>
+<h4 id="step-3-iterative-graph-reduction">Step 3: Iterative Graph Reduction</h4>
+<p>After identifying and simplifying the series and parallel connections, the graph is reduced step-by-step:</p>
+<ol>
+<li><strong>Identify series connections</strong>: Traverse the graph and check for resistors that are connected in series. Once identified, combine them by adding their resistance values.</li>
+<li><strong>Identify parallel connections</strong>: Similarly, check for resistors that are connected in parallel. Combine them using the parallel resistance formula.</li>
+<li><strong>Repeat the process</strong>: After each reduction (whether series or parallel), the graph is updated. New series or parallel connections may emerge from the simplification, so the process is repeated until the graph is reduced to a single equivalent resistance.</li>
+</ol>
+<h4 id="step-4-final-simplification">Step 4: Final Simplification</h4>
+<ul>
+<li>The algorithm continues simplifying the circuit until only <strong>one node</strong> remains, and the resistance of this node is the equivalent resistance of the entire circuit.</li>
+</ul>
+<hr/>
+<h3 id="pseudocode-for-the-algorithm">Pseudocode for the Algorithm</h3>
+<pre><code class="language-plaintext">Algorithm: Calculate Equivalent Resistance Using Graph Theory
+
+Input: Graph G with nodes representing junctions and edges representing resistors
+Output: Equivalent resistance of the entire circuit
+
+1. Initialize the graph G with nodes and resistors (edges with weights).
+2. While the graph contains more than one node:
+   a. Detect and simplify **series connections**:
+      - For each pair of nodes connected by resistors in series:
+        - Combine the resistances by adding their weights.
+        - Remove the original nodes and replace them with a new node that has the combined resistance.
+   b. Detect and simplify **parallel connections**:
+      - For each set of nodes connected by resistors in parallel:
+        - Combine the resistances using the parallel formula.
+        - Remove the original resistors and replace them with a new equivalent resistor.
+3. Once the graph is reduced to a single node, return the equivalent resistance of that node.
+
+</code></pre>
+<h1 id="step-by-step-solution-for-task-2-equivalent-resistance-calculation-using-graph-theory">Step-by-Step Solution for Task 2: Equivalent Resistance Calculation Using Graph Theory</h1>
+<h2 id="key-concepts">Key Concepts:</h2>
+<h3 id="series-resistors">Series Resistors:</h3>
+<ul>
+<li>The equivalent resistance of two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> in series is simply the sum:</li>
+</ul>
+<p>$$
+  R_{eq} = R_1 + R_2
+  $$</p>
+<h3 id="parallel-resistors">Parallel Resistors:</h3>
+<ul>
+<li>The equivalent resistance of two resistors <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> in parallel is given by:</li>
+</ul>
+<p>$$
+  \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2}
+  $$</p>
+<h3 id="graph-representation">Graph Representation:</h3>
+<ul>
+<li><strong>Nodes</strong> represent junctions in the circuit.</li>
+<li><strong>Edges</strong> represent resistors with <strong>weights</strong> equal to their resistance values.</li>
+</ul>
+<p>The circuit is represented as an undirected graph, where the resistors are edges with weights, and the junctions are the nodes.</p>
+<h2 id="simplification-process">Simplification Process:</h2>
+<ol>
+<li>
+<p><strong>Series Resistor Simplification:</strong></p>
+</li>
+<li>
+<p>If two resistors are in series, their resistances add up. For nodes <span class="arithmatex">\( A \)</span>, <span class="arithmatex">\( B \)</span>, and <span class="arithmatex">\( C \)</span>, where <span class="arithmatex">\( A \)</span> is connected to <span class="arithmatex">\( B \)</span> and <span class="arithmatex">\( B \)</span> is connected to <span class="arithmatex">\( C \)</span>, replace the two resistors (edges) with one equivalent resistor whose resistance is the sum of the two.</p>
+</li>
+</ol>
+<p>$$
+   R_{eq} = R_1 + R_2
+   $$</p>
+<p>After the simplification, remove the two original resistors and add a new one between <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>.</p>
+<ol>
+<li>
+<p><strong>Parallel Resistor Simplification:</strong></p>
+</li>
+<li>
+<p>If two resistors are in parallel, their combined resistance is given by the formula:</p>
+</li>
+</ol>
+<p>$$
+   \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2}
+   $$</p>
+<p>For nodes <span class="arithmatex">\( A \)</span>, <span class="arithmatex">\( B \)</span>, and <span class="arithmatex">\( C \)</span>, where <span class="arithmatex">\( A \)</span> is connected to <span class="arithmatex">\( B \)</span>, and <span class="arithmatex">\( B \)</span> is connected to <span class="arithmatex">\( C \)</span>, replace the two resistors (edges) with one equivalent resistor using the formula above. Remove the two original resistors and add a new one between <span class="arithmatex">\( A \)</span> and <span class="arithmatex">\( C \)</span>.</p>
+<h2 id="step-by-step-process">Step-by-Step Process:</h2>
+<h3 id="1-graph-creation">1. <strong>Graph Creation:</strong></h3>
+<ul>
+<li>First, a graph is created using the <code>networkx</code> library where:</li>
+<li><strong>Nodes</strong> represent junctions in the circuit.</li>
+<li><strong>Edges</strong> represent the resistors, with each edge having a weight representing the resistance value.</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>Resistor <span class="arithmatex">\( R_1 = 6 \)</span> ohms between nodes 1 and 2.</li>
+<li>Resistor <span class="arithmatex">\( R_2 = 3 \)</span> ohms between nodes 2 and 3.</li>
+<li>Resistor <span class="arithmatex">\( R_3 = 4 \)</span> ohms between nodes 3 and 4.</li>
+<li>Resistor <span class="arithmatex">\( R_4 = 5 \)</span> ohms between nodes 2 and 5.</li>
+<li>Resistor <span class="arithmatex">\( R_5 = 2 \)</span> ohms between nodes 4 and 6.</li>
+</ul>
+<h3 id="2-series-resistor-detection">2. <strong>Series Resistor Detection:</strong></h3>
+<ul>
+<li>Identify two resistors that are connected in series by looking for nodes that have exactly two neighbors.</li>
+<li>Apply the series simplification formula to these pairs and replace them with a single equivalent resistor.</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>If <span class="arithmatex">\( R_1 \)</span> and <span class="arithmatex">\( R_2 \)</span> are in series, their equivalent resistance will be:
+  $$
+  R_{eq} = R_1 + R_2
+  $$</li>
+</ul>
+<p>After simplification, update the graph with a new edge that represents the equivalent resistance.</p>
+<h3 id="3-parallel-resistor-detection">3. <strong>Parallel Resistor Detection:</strong></h3>
+<ul>
+<li>Identify two resistors that are connected in parallel by looking for nodes that have two neighbors with the same connecting node.</li>
+<li>Apply the parallel simplification formula to these pairs and replace them with a single equivalent resistor.</li>
+</ul>
+<p>Example:</p>
+<ul>
+<li>If <span class="arithmatex">\( R_2 \)</span> and <span class="arithmatex">\( R_3 \)</span> are in parallel, their equivalent resistance will be:
+  $$
+  \frac{1}{R_{eq}} = \frac{1}{R_2} + \frac{1}{R_3}
+  $$</li>
+</ul>
+<p>After simplification, update the graph with a new edge that represents the equivalent resistance.</p>
+<h3 id="4-repeat-simplification">4. <strong>Repeat Simplification:</strong></h3>
+<ul>
+<li>Continue the simplification process until only one edge remains in the graph.</li>
+<li>The remaining edge represents the <strong>equivalent resistance</strong> of the entire circuit.</li>
+</ul>
+<h3 id="5-final-result">5. <strong>Final Result:</strong></h3>
+<ul>
+<li>The final equivalent resistance is the weight of the last remaining edge in the graph, which is the simplified result of the entire circuit.</li>
+</ul>
+<h2 id="example-circuit">Example Circuit:</h2>
+<h3 id="graph-representation_1">Graph Representation:</h3>
+<p>Nodes: <span class="arithmatex">\( 1, 2, 3, 4, 5, 6 \)</span><br/>
+Edges:</p>
+<ul>
+<li><span class="arithmatex">\( (1, 2, R_1 = 6 \, \Omega) \)</span></li>
+<li><span class="arithmatex">\( (2, 3, R_2 = 3 \, \Omega) \)</span></li>
+<li><span class="arithmatex">\( (3, 4, R_3 = 4 \, \Omega) \)</span></li>
+<li><span class="arithmatex">\( (2, 5, R_4 = 5 \, \Omega) \)</span></li>
+<li><span class="arithmatex">\( (4, 6, R_5 = 2 \, \Omega) \)</span></li>
+</ul>
+<pre><code class="language-python">import networkx as nx
+import matplotlib.pyplot as plt
+
+# Function to plot the graph for visualization
+def plot_graph(G, title="Circuit Graph"):
+    pos = nx.spring_layout(G)  # Layout for better visualization
+    plt.figure(figsize=(10, 8))
+    node_size = [500 + 100 * G.degree(node) for node in G.nodes]
+    node_color = ['lightgreen' if G.degree(node) == 1 else 'lightblue' for node in G.nodes]
+    nx.draw(G, pos, with_labels=True, node_color=node_color, node_size=node_size, font_size=15, font_weight="bold", edge_color="gray")
+
+    edge_labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=12)
+
+    plt.title(title)
+    plt.axis('off')  # Hide axes for a cleaner presentation
+    plt.show()
+
+# Function to find series resistors
+def find_series_resistors(G):
+    series_pairs = []
+    for node in G.nodes:
+        neighbors = list(G.neighbors(node))
+
+        if len(neighbors) == 2:  # Exactly two neighbors for series connection
+            if G[node][neighbors[0]]['weight'] and G[node][neighbors[1]]['weight']:
+                series_pairs.append((node, neighbors[0], neighbors[1]))
+    return series_pairs
+
+# Function to find parallel resistors
+def find_parallel_resistors(G):
+    parallel_pairs = []
+    for node in G.nodes:
+        neighbors = list(G.neighbors(node))
+
+        if len(neighbors) == 2:  # Exactly two neighbors for parallel connection
+            if G[node][neighbors[0]]['weight'] and G[node][neighbors[1]]['weight']:
+                parallel_pairs.append((node, neighbors[0], neighbors[1]))
+    return parallel_pairs
+
+# Function to simplify a series resistor
+def simplify_series(G, series_pair):
+    node1, node2, node3 = series_pair
+    R1 = G[node2][node1]['weight']
+    R2 = G[node3][node2]['weight']
+    R_eq = R1 + R2  # Series combination
+
+    # Remove the two resistors and add the equivalent one
+    G.remove_edge(node2, node1)
+    G.remove_edge(node3, node2)
+    G.add_edge(node1, node3, weight=R_eq)
+    return G
+
+# Function to simplify a parallel resistor
+def simplify_parallel(G, parallel_pair):
+    node1, node2, node3 = parallel_pair
+    R1 = G[node1][node2]['weight']
+    R2 = G[node2][node3]['weight']
+    R_eq = 1 / (1 / R1 + 1 / R2)  # Parallel combination
+
+    # Remove the two resistors and add the equivalent one
+    G.remove_edge(node1, node2)
+    G.remove_edge(node2, node3)
+    G.add_edge(node1, node3, weight=R_eq)
+    return G
+
+# Main function to calculate equivalent resistance
+def calculate_equivalent_resistance(G):
+    # Initial graph plot
+    plot_graph(G, title="Initial Circuit Graph")
+
+    step = 1
+    # Keep simplifying the graph until only one edge remains
+    while len(G.edges) &gt; 1:
+        # Simplify series connections
+        series_pairs = find_series_resistors(G)
+        if series_pairs:
+            print(f"Step {step}: Simplifying series pairs: {series_pairs}")
+        for series_pair in series_pairs:
+            G = simplify_series(G, series_pair)
+
+        # Plot after simplifying series resistors
+        plot_graph(G, title=f"After Step {step}: Simplified Series Resistors")
+
+        # Simplify parallel connections
+        parallel_pairs = find_parallel_resistors(G)
+        if parallel_pairs:
+            print(f"Step {step}: Simplifying parallel pairs: {parallel_pairs}")
+        for parallel_pair in parallel_pairs:
+            G = simplify_parallel(G, parallel_pair)
+
+        # Plot after simplifying parallel resistors
+        plot_graph(G, title=f"After Step {step}: Simplified Parallel Resistors")
+
+        step += 1
+
+    # The final equivalent resistance is the only edge left in the graph
+    final_resistance = None
+    for edge in G.edges(data=True):
+        final_resistance = edge[2]['weight']
+
+    return final_resistance
+
+# Example usage: Create a circuit graph
+G = nx.Graph()
+
+# Adding resistors (edges) to the circuit
+# Resistor values: R1 = 6 ohms, R2 = 3 ohms, R3 = 4 ohms, R4 = 5 ohms, R5 = 2 ohms
+G.add_edge(1, 2, weight=6)  # R1
+G.add_edge(2, 3, weight=3)  # R2
+G.add_edge(3, 4, weight=4)  # R3
+G.add_edge(2, 5, weight=5)  # R4
+G.add_edge(4, 6, weight=2)  # R5
+
+# Call the function to calculate the equivalent resistance
+equivalent_resistance = calculate_equivalent_resistance(G)
+print(f"The equivalent resistance of the circuit is: {equivalent_resistance} ohms")
+
+</code></pre>
+<p><img alt="alt text" src="../image.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
