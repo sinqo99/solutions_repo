@@ -172,6 +172,114 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="simple-pendulum-experiment">Simple Pendulum Experiment</h1>
+<h2 id="abstract">Abstract</h2>
+<p>This experiment aims to determine the acceleration due to gravity <span class="arithmatex">\( g \)</span> by analyzing the motion of a simple pendulum. By carefully measuring the period of oscillation and accounting for uncertainties, we assess the precision of our results and identify sources of error.</p>
+<h2 id="procedure">Procedure</h2>
+<h3 id="1-materials">1. Materials:</h3>
+<ul>
+<li>A string (1 or 1.5 meters long).</li>
+<li>A small weight (e.g., bag of coins, bag of sugar, key chain) mounted on the string.</li>
+<li>Stopwatch (or smartphone timer).</li>
+<li>Ruler or measuring tape.</li>
+</ul>
+<h3 id="2-setup">2. Setup:</h3>
+<ul>
+<li>Attach the weight to the string and fix the other end to a sturdy support.</li>
+<li>Measure the length of the pendulum, <span class="arithmatex">\( L \)</span>, from the suspension point to the center of the weight using a ruler or measuring tape.</li>
+<li>Record the resolution of the measuring tool and calculate the uncertainty as half the resolution:<br/>
+<span class="arithmatex">\( \Delta L = \frac{\text{Ruler Resolution}}{2} \)</span>.</li>
+</ul>
+<h3 id="3-data-collection">3. Data Collection:</h3>
+<ul>
+<li>Displace the pendulum slightly (&lt;15°) and release it.</li>
+<li>Measure the time for 10 full oscillations (<span class="arithmatex">\( T\_{10} \)</span>) and repeat this process 10 times. Record all 10 measurements.</li>
+<li>Calculate the mean time for 10 oscillations (<span class="arithmatex">\( \overline{T}\_{10} \)</span>) and the standard deviation (<span class="arithmatex">\( \sigma_T \)</span>).</li>
+<li>Determine the uncertainty in the mean time:<br/>
+<span class="arithmatex">\( \Delta T\_{10} = \frac{\sigma_T}{\sqrt{10}} \)</span>.</li>
+</ul>
+<h2 id="calculations">Calculations</h2>
+<h3 id="1-calculate-the-period">1. Calculate the Period:</h3>
+<div class="arithmatex">\[ T = \frac{\overline{T}_{10}}{10} $$
+$$\Delta T = \frac{\Delta T_{10}}{10} \]</div>
+<h3 id="2-determine-g">2. Determine <span class="arithmatex">\( g \)</span>:</h3>
+<div class="arithmatex">\[g = \frac{4\pi^2 L}{T^2} \]</div>
+<h3 id="3-propagate-uncertainties">3. Propagate Uncertainties:</h3>
+<div class="arithmatex">\[ \Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2 \frac{\Delta T}{T}\right)^2} \]</div>
+<h2 id="deliverables">Deliverables</h2>
+<h3 id="1-tabulated-data">1. Tabulated Data</h3>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Symbol</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Length of pendulum</td>
+<td><span class="arithmatex">\( L \)</span></td>
+<td><span class="arithmatex">\( L \)</span></td>
+</tr>
+<tr>
+<td>Uncertainty in length</td>
+<td><span class="arithmatex">\( \Delta L \)</span></td>
+<td><span class="arithmatex">\( \frac{\text{Ruler Resolution}}{2} \)</span></td>
+</tr>
+<tr>
+<td>10 oscillation times</td>
+<td><span class="arithmatex">\( T\_{10} \)</span></td>
+<td><span class="arithmatex">\( T*{10,1}, T*{10,2}, ..., T\_{10,10} \)</span></td>
+</tr>
+<tr>
+<td>Mean time for 10 oscillations</td>
+<td><span class="arithmatex">\( \overline{T}\_{10} \)</span></td>
+<td><span class="arithmatex">\( \frac{\sum T\_{10}}{10} \)</span></td>
+</tr>
+<tr>
+<td>Standard deviation</td>
+<td><span class="arithmatex">\( \sigma_T \)</span></td>
+<td><span class="arithmatex">\( \sqrt{\frac{\sum (T*{10,i} - \overline{T}*{10})^2}{9}} \)</span></td>
+</tr>
+<tr>
+<td>Uncertainty in mean time</td>
+<td><span class="arithmatex">\( \Delta T\_{10} \)</span></td>
+<td><span class="arithmatex">\( \frac{\sigma_T}{\sqrt{10}} \)</span></td>
+</tr>
+<tr>
+<td>Period</td>
+<td><span class="arithmatex">\( T \)</span></td>
+<td><span class="arithmatex">\( \frac{\overline{T}\_{10}}{10} \)</span></td>
+</tr>
+<tr>
+<td>Uncertainty in period</td>
+<td><span class="arithmatex">\( \Delta T \)</span></td>
+<td><span class="arithmatex">\( \frac{\Delta T\_{10}}{10} \)</span></td>
+</tr>
+<tr>
+<td>Acceleration due to gravity</td>
+<td><span class="arithmatex">\( g \)</span></td>
+<td><span class="arithmatex">\( \frac{4\pi^2 L}{T^2} \)</span></td>
+</tr>
+<tr>
+<td>Uncertainty in <span class="arithmatex">\( g \)</span></td>
+<td><span class="arithmatex">\( \Delta g \)</span></td>
+<td><span class="arithmatex">\( g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2 \frac{\Delta T}{T}\right)^2} \)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-discussion-on-uncertainty">2. Discussion on Uncertainty</h3>
+<ul>
+<li><strong>Effect of measurement resolution on <span class="arithmatex">\( \Delta L \)</span></strong>: The uncertainty in length measurement is determined by the resolution of the ruler. A higher resolution ruler would reduce <span class="arithmatex">\( \Delta L \)</span>, leading to a more precise value of <span class="arithmatex">\( g \)</span>.</li>
+<li><strong>Variability in timing and its impact on <span class="arithmatex">\( \Delta T \)</span></strong>: Human reaction time affects stopwatch measurements, contributing to <span class="arithmatex">\( \sigma_T \)</span>. This, in turn, affects <span class="arithmatex">\( \Delta T \)</span> and the uncertainty in <span class="arithmatex">\( g \)</span>.</li>
+<li><strong>Assumptions and experimental limitations</strong>:</li>
+<li>The small-angle approximation (<span class="arithmatex">\( \theta &lt; 15^\circ \)</span>) is assumed to ensure simple harmonic motion.</li>
+<li>Air resistance and friction at the pivot are neglected, which may introduce small errors.</li>
+<li>The string is assumed to be massless and inextensible.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This experiment successfully estimates the acceleration due to gravity <span class="arithmatex">\( g \)</span> using a simple pendulum. The precision of our results depends on the accuracy of our length and time measurements. While human reaction time introduces uncertainty, repeated measurements mitigate its effects. Future improvements include using automated timing systems and air resistance corrections for enhanced accuracy.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
