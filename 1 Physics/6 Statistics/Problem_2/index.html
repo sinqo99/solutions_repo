@@ -172,6 +172,185 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="estimating-pi-using-monte-carlo-methods">Estimating Pi Using Monte Carlo Methods</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Monte Carlo simulations are a powerful computational technique that use randomness to solve problems or estimate values. One elegant application of Monte Carlo methods is estimating the value of <span class="arithmatex">\(\pi\)</span> using geometric probability. By randomly generating points and analyzing their positions relative to a geometric shape, we can approximate <span class="arithmatex">\(\pi\)</span> in an intuitive and visually engaging way.</p>
+<p>This method connects fundamental concepts in probability, geometry, and numerical computation. The Monte Carlo approach for estimating <span class="arithmatex">\(\pi\)</span> highlights the versatility and simplicity of randomness while offering insights into convergence rates and computational efficiency.</p>
+<hr/>
+<h2 id="part-1-estimating-pi-using-a-circle">Part 1: Estimating <span class="arithmatex">\(\pi\)</span> Using a Circle</h2>
+<h3 id="1-theoretical-foundation">1. Theoretical Foundation</h3>
+<p>The idea behind using the circle-based Monte Carlo method to estimate <span class="arithmatex">\(\pi\)</span> relies on the ratio of points inside a circle to the total number of points in a square. Consider a unit circle inscribed inside a square. The unit circle is centered at the origin with the equation:</p>
+<div class="arithmatex">\[
+x^2 + y^2 \leq 1
+\]</div>
+<p>This circle is inscribed within a square of side length 2. If we randomly generate points <span class="arithmatex">\((x, y)\)</span> within the square (with <span class="arithmatex">\(x, y \in [-1, 1]\)</span>), we can check whether each point lies inside the circle using the equation above.</p>
+<p>The ratio of the area of the circle to the area of the square is:</p>
+<div class="arithmatex">\[
+\frac{A_{\text{circle}}}{A_{\text{square}}} = \frac{\pi}{4}
+\]</div>
+<p>Thus, the ratio of points inside the circle to the total number of points will approximate the ratio of the areas, allowing us to estimate <span class="arithmatex">\(\pi\)</span>. Specifically:</p>
+<div class="arithmatex">\[
+\pi \approx 4 \times \frac{\text{Number of points inside the circle}}{\text{Total number of points}}
+\]</div>
+<h3 id="2-simulation">2. Simulation</h3>
+<p>We'll simulate the process by generating random points in the square and counting how many fall inside the unit circle.</p>
+<h4 id="python-code-for-circle-based-monte-carlo-method">Python Code for Circle-Based Monte Carlo Method:</h4>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+def estimate_pi_advanced(num_points):
+    # Generate random points in a 2D space [-1, 1] x [-1, 1]
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+
+    # Calculate the number of points inside the unit circle
+    inside_circle = np.sum(x**2 + y**2 &lt;= 1)
+
+    # Estimate Pi
+    pi_estimate = 4 * inside_circle / num_points
+
+    # Plotting
+    plt.figure(figsize=(6, 6))
+    plt.scatter(x, y, color='blue', s=1, alpha=0.5, label="Points")
+    plt.scatter(x[x**2 + y**2 &lt;= 1], y[x**2 + y**2 &lt;= 1], color='green', s=1, label="Inside Circle")
+    plt.scatter(x[x**2 + y**2 &gt; 1], y[x**2 + y**2 &gt; 1], color='red', s=1, label="Outside Circle")
+    plt.title(f"Monte Carlo Estimation of Pi: {pi_estimate}")
+    plt.gca().set_aspect('equal', adjustable='box')
+    plt.legend()
+    plt.show()
+
+    return pi_estimate
+
+# Running the simulation with a larger number of points
+num_points = 100000
+pi_estimate = estimate_pi_advanced(num_points)
+print(f"Estimated Pi: {pi_estimate}")
+
+</code></pre>
+<p><img alt="alt text" src="../image-3.png"/></p>
+<h1 id="task-2-estimating-pi-using-buffons-needle">Task 2: Estimating Pi using Buffon’s Needle</h1>
+<h2 id="introduction">Introduction</h2>
+<p>In this task, we will estimate the value of <span class="arithmatex">\(\pi\)</span> using a famous problem known as <strong>Buffon’s Needle</strong>. This problem relies on the geometric probability of a needle randomly dropped on a plane with parallel lines. By calculating the probability of the needle crossing one of these lines, we can estimate the value of <span class="arithmatex">\(\pi\)</span>.</p>
+<p>Buffon’s Needle is one of the early applications of <strong>Monte Carlo methods</strong> that uses random sampling to solve problems, and it connects geometric probability to numerical computation.</p>
+<h2 id="1-theoretical-foundation_1">1. Theoretical Foundation</h2>
+<h3 id="11-buffons-needle-problem">1.1 Buffon’s Needle Problem</h3>
+<p>In Buffon’s Needle problem, a needle of length <span class="arithmatex">\(L\)</span> is dropped on a plane with parallel lines spaced at a distance <span class="arithmatex">\(D\)</span>. The question is: what is the probability that the needle crosses one of the lines?</p>
+<p>By using probability theory, this problem leads to the following formula for estimating <span class="arithmatex">\(\pi\)</span>:</p>
+<div class="arithmatex">\[
+P(\text{crossing}) = \frac{2L}{\pi D}
+\]</div>
+<p>From this, we can estimate <span class="arithmatex">\(\pi\)</span> using the formula:</p>
+<div class="arithmatex">\[
+\pi \approx \frac{2L \times \text{Number of Drops}}{D \times \text{Number of Crossings}}
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(L\)</span> is the length of the needle,</li>
+<li><span class="arithmatex">\(D\)</span> is the distance between the parallel lines,</li>
+<li>The <strong>crossings</strong> are the number of times the needle crosses a line during the drop.</li>
+</ul>
+<h2 id="2-simulation_1">2. Simulation</h2>
+<h3 id="21-buffons-needle-simulation">2.1 Buffon’s Needle Simulation</h3>
+<p>We simulate the random dropping of needles on a plane with parallel lines. We randomly generate the <strong>angle</strong> of the needle and the <strong>distance</strong> from the center of the needle to the nearest line. If the distance from the center is less than or equal to the half-length of the needle projected in the direction of the angle, the needle crosses the line.</p>
+<p>The estimate of <span class="arithmatex">\(\pi\)</span> is calculated as the ratio of the total number of drops to the number of crossings.</p>
+<h3 id="22-python-code-for-simulation">2.2 Python Code for Simulation</h3>
+<p>Below is the Python code that implements the <strong>Buffon’s Needle</strong> simulation:</p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+def visualize_buffon_3d(num_drops, needle_length=1, line_distance=2):
+    # Create a 3D plot to visualize the simulation
+    fig = plt.figure(figsize=(12, 10))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Draw parallel lines on the xy-plane
+    num_lines = 20  # Number of lines on the plane
+    for i in range(num_lines):
+        ax.plot([-needle_length, needle_length], [i * line_distance, i * line_distance], [0, 0], color='black', lw=1, linestyle='--')
+
+    # Track the number of crossings
+    crossings = 0
+
+    # Generate the needles
+    for _ in range(num_drops):
+        # Randomly generate the angle (theta) and the distance from the center of the needle to the nearest line
+        angle = np.random.uniform(0, np.pi / 2)
+        distance = np.random.uniform(0, line_distance / 2)
+
+        # Randomly assign z-axis position for 3D simulation
+        z_position = np.random.uniform(-0.5, 0.5)
+
+        # Calculate the needle's half-length projection along the x-axis
+        needle_half_length = (needle_length / 2) * np.cos(angle)
+
+        # Randomly position the needle center (distance from the line and the angle of rotation)
+        center_x = np.random.uniform(-needle_half_length, needle_half_length)
+        center_y = np.random.uniform(0, line_distance)
+
+        # Calculate the coordinates of the needle's ends in 3D
+        x1 = center_x - needle_half_length * np.cos(angle)
+        y1 = center_y - needle_half_length * np.sin(angle)
+        z1 = z_position
+
+        x2 = center_x + needle_half_length * np.cos(angle)
+        y2 = center_y + needle_half_length * np.sin(angle)
+        z2 = z_position
+
+        # Check if the needle crosses the line
+        if distance &lt;= (needle_length / 2) * np.sin(angle):
+            crossings += 1
+            color = 'red'  # Crossed line, red color
+        else:
+            color = 'blue'  # Did not cross line, blue color
+
+        # Plot the needle in 3D space
+        ax.plot([x1, x2], [y1, y2], [z1, z2], color=color, lw=3)
+
+    # Set plot labels and title
+    ax.set_title(f"Buffon's Needle 3D Simulation\nNumber of Drops: {num_drops} | Crossings: {crossings}", fontsize=16)
+    ax.set_xlabel('X-axis', fontsize=14)
+    ax.set_ylabel('Y-axis', fontsize=14)
+    ax.set_zlabel('Z-axis', fontsize=14)
+
+    # Set the limits for the axes
+    ax.set_xlim([-needle_length, needle_length])
+    ax.set_ylim([0, num_lines * line_distance])
+    ax.set_zlim([-0.5, 0.5])
+
+    # Show the plot
+    plt.show()
+
+def estimate_pi_buffon_3d(num_drops, needle_length=1, line_distance=2):
+    crossings = 0
+    for _ in range(num_drops):
+        # Randomly generate the angle (theta) and the distance from the center of the needle to the nearest line
+        angle = np.random.uniform(0, np.pi / 2)
+        distance = np.random.uniform(0, line_distance / 2)
+
+        # Check if the needle crosses the line
+        if distance &lt;= (needle_length / 2) * np.sin(angle):
+            crossings += 1
+
+    # Estimate Pi using the formula
+    pi_estimate = (2 * needle_length * num_drops) / (line_distance * crossings)
+
+    return pi_estimate
+
+# Run the simulation
+num_drops = 1000  # Number of needle drops for the simulation
+estimated_pi_buffon = estimate_pi_buffon_3d(num_drops)
+
+# Print estimated Pi
+print(f"Estimated Pi using Buffon's Needle with {num_drops} drops: {estimated_pi_buffon}")
+
+# Visualize the 3D simulation
+visualize_buffon_3d(num_drops)
+
+</code></pre>
+<p><img alt="alt text" src="../image-4.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
