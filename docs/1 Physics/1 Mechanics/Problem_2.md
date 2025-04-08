@@ -226,3 +226,38 @@ plt.show()
 ```
 
 ![alt text](image-2.png)
+
+# Explanation of the Provided Graphs
+
+Certainly! Here’s a structured explanation about the provided graphs:
+
+### **Overview of the Graphs**
+
+The three graphs illustrate the relationship between angular displacement (θ), angular velocity (ω), and time. The data appears to represent a damped oscillatory system, which is common in mechanical and physical systems.
+
+### **1. Angular Displacement vs. Time**
+
+- **Graph Description**: The first graph shows angular displacement (θ in radians) on the y-axis against time (s) on the x-axis.
+- **Observations**:
+  - **Initial Oscillation**: The graph starts with an oscillation around zero, indicating that the system oscillates initially.
+  - **Damping Effect**: The amplitude of the oscillation decreases over time, suggesting the presence of damping in the system. Eventually, it stabilizes around a constant value (~0.2 rad).
+
+### **2. Angular Velocity vs. Time**
+
+- **Graph Description**: The second graph depicts angular velocity (ω in radians per second) on the y-axis and time (s) on the x-axis.
+- **Observations**:
+  - **Oscillatory Behavior**: The angular velocity also shows an oscillatory behavior similar to displacement, but it oscillates around zero.
+  - **Negative Values**: The negative values indicate that, at certain times, the motion is in the opposite direction.
+  - **Damping**: Like the displacement graph, the oscillations gradually diminish, supporting the idea of damping.
+
+### **3. Phase Plot (Theta vs. Omega)**
+
+- **Graph Description**: The last graph is a phase plot with angular displacement (θ) on the x-axis and angular velocity (ω) on the y-axis.
+- **Observations**:
+  - **Closed Loop Shape**: The plot depicts a closed loop, indicating a periodic motion.
+  - **Directionality**: The orientation of the loop shows how the angular velocity varies with displacement, confirming that as the displacement increases, the angular velocity also changes (in both positive and negative directions).
+  - **Stable Point**: The center of the plot appears to converge towards a stable point (θ = 0, ω = 0), reinforcing the notion of damped oscillations.
+
+### **Conclusion**
+
+- **Key Takeaway**: The combination of these graphs illustrates a damped oscillatory system where the displacement and velocity decay over time. The phase plot effectively depicts the relationship between these two variables,
