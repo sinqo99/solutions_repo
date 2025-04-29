@@ -388,123 +388,138 @@ Edges:</p>
 <pre><code class="language-python">import networkx as nx
 import matplotlib.pyplot as plt
 
-# Function to plot the graph for visualization
-def plot_graph(G, title="Circuit Graph"):
-    pos = nx.spring_layout(G)  # Layout for better visualization
-    plt.figure(figsize=(10, 8))
-    node_size = [500 + 100 * G.degree(node) for node in G.nodes]
-    node_color = ['lightgreen' if G.degree(node) == 1 else 'lightblue' for node in G.nodes]
-    nx.draw(G, pos, with_labels=True, node_color=node_color, node_size=node_size, font_size=15, font_weight="bold", edge_color="gray")
+def plot_circuit(G, title):
+    pos = nx.spring_layout(G, seed=42)
+    plt.figure(figsize=(8, 6))
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=700, font_weight='bold', edge_color='gray')
 
-    edge_labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=12)
+    edge_labels = {}
+    for u, v, k, data in G.edges(data=True, keys=True):
+        label = f"{data['resistance']:.1f}Ω"
+        if (u, v) in edge_labels:
+            edge_labels[(u, v)] += f", {label}"
+        elif (v, u) in edge_labels:
+            edge_labels[(v, u)] += f", {label}"
+        else:
+            edge_labels[(u, v)] = label
 
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='red')
     plt.title(title)
-    plt.axis('off')  # Hide axes for a cleaner presentation
     plt.show()
 
-# Function to find series resistors
-def find_series_resistors(G):
-    series_pairs = []
-    for node in G.nodes:
-        neighbors = list(G.neighbors(node))
+def merge_series(G, start_node, end_node):
+    while True:
+        nodes_to_merge = [node for node in G.nodes if G.degree(node) == 2 and node not in [start_node, end_node]]
+        if not nodes_to_merge:
+            break
+        for node in nodes_to_merge:
+            edges = list(G.edges(node, keys=True, data=True))
+            if len(edges) == 2:
+                (u1, v1, k1, d1), (u2, v2, k2, d2) = edges
+                R1 = d1['resistance']
+                R2 = d2['resistance']
+                endpoint1 = u1 if u1 != node else v1
+                endpoint2 = u2 if u2 != node else v2
+                R_series = R1 + R2
+                # Remove the node and its edges
+                G.remove_edge(u1, v1, key=k1)
+                G.remove_edge(u2, v2, key=k2)
+                G.remove_node(node)
+                G.add_edge(endpoint1, endpoint2, resistance=R_series)
 
-        if len(neighbors) == 2:  # Exactly two neighbors for series connection
-            if G[node][neighbors[0]]['weight'] and G[node][neighbors[1]]['weight']:
-                series_pairs.append((node, neighbors[0], neighbors[1]))
-    return series_pairs
+def merge_parallel(G):
+    edges_to_check = list(G.edges(keys=True, data=True))
+    seen_pairs = set()
 
-# Function to find parallel resistors
-def find_parallel_resistors(G):
-    parallel_pairs = []
-    for node in G.nodes:
-        neighbors = list(G.neighbors(node))
+    for u, v, k, data in edges_to_check:
+        if (u, v) in seen_pairs or (v, u) in seen_pairs:
+            continue
+        parallel_edges = list(G.get_edge_data(u, v).items())
+        if len(parallel_edges) &gt; 1:
+            resistances = [attr['resistance'] for key, attr in parallel_edges]
+            R_eq = 1 / sum(1 / r for r in resistances)
+            for key, attr in parallel_edges:
+                G.remove_edge(u, v, key=key)
+            G.add_edge(u, v, resistance=R_eq)
+        seen_pairs.add((u, v))
 
-        if len(neighbors) == 2:  # Exactly two neighbors for parallel connection
-            if G[node][neighbors[0]]['weight'] and G[node][neighbors[1]]['weight']:
-                parallel_pairs.append((node, neighbors[0], neighbors[1]))
-    return parallel_pairs
+def calculate_equivalent_resistance(G, start_node, end_node):
+    while True:
+        prev_edges = list(G.edges(keys=True, data=True))
+        merge_series(G, start_node, end_node)
+        merge_parallel(G)
+        if len(G.edges) == 1 and G.has_edge(start_node, end_node):
+            return list(G.get_edge_data(start_node, end_node).values())[0]['resistance']
+        if list(G.edges(keys=True, data=True)) == prev_edges:
+            break
+    if G.has_edge(start_node, end_node):
+        return list(G.get_edge_data(start_node, end_node).values())[0]['resistance']
+    else:
+        raise Exception("Unable to reduce to a single equivalent resistor.")
 
-# Function to simplify a series resistor
-def simplify_series(G, series_pair):
-    node1, node2, node3 = series_pair
-    R1 = G[node2][node1]['weight']
-    R2 = G[node3][node2]['weight']
-    R_eq = R1 + R2  # Series combination
+# --- Build your circuit ---
+G = nx.MultiGraph()  # VERY IMPORTANT: MultiGraph
+start_node = 'A'
+end_node = 'B'
 
-    # Remove the two resistors and add the equivalent one
-    G.remove_edge(node2, node1)
-    G.remove_edge(node3, node2)
-    G.add_edge(node1, node3, weight=R_eq)
-    return G
+# Add resistors (edges)
+G.add_edge('A', 'C', resistance=100)
+G.add_edge('C', 'D', resistance=200)
+G.add_edge('D', 'B', resistance=300)
+G.add_edge('A', 'D', resistance=150)
+G.add_edge('C', 'B', resistance=50)
 
-# Function to simplify a parallel resistor
-def simplify_parallel(G, parallel_pair):
-    node1, node2, node3 = parallel_pair
-    R1 = G[node1][node2]['weight']
-    R2 = G[node2][node3]['weight']
-    R_eq = 1 / (1 / R1 + 1 / R2)  # Parallel combination
+# Plot original circuit
+plot_circuit(G, "Original Circuit")
 
-    # Remove the two resistors and add the equivalent one
-    G.remove_edge(node1, node2)
-    G.remove_edge(node2, node3)
-    G.add_edge(node1, node3, weight=R_eq)
-    return G
+# Solve and reduce
+req = calculate_equivalent_resistance(G, start_node, end_node)
+print(f"Equivalent Resistance between {start_node} and {end_node}: {req:.2f} Ohms")
 
-# Main function to calculate equivalent resistance
-def calculate_equivalent_resistance(G):
-    # Initial graph plot
-    plot_graph(G, title="Initial Circuit Graph")
+# Plot reduced circuit
+plot_circuit(G, "Reduced Circuit (Equivalent Resistor)")
 
-    step = 1
-    # Keep simplifying the graph until only one edge remains
-    while len(G.edges) &gt; 1:
-        # Simplify series connections
-        series_pairs = find_series_resistors(G)
-        if series_pairs:
-            print(f"Step {step}: Simplifying series pairs: {series_pairs}")
-        for series_pair in series_pairs:
-            G = simplify_series(G, series_pair)
-
-        # Plot after simplifying series resistors
-        plot_graph(G, title=f"After Step {step}: Simplified Series Resistors")
-
-        # Simplify parallel connections
-        parallel_pairs = find_parallel_resistors(G)
-        if parallel_pairs:
-            print(f"Step {step}: Simplifying parallel pairs: {parallel_pairs}")
-        for parallel_pair in parallel_pairs:
-            G = simplify_parallel(G, parallel_pair)
-
-        # Plot after simplifying parallel resistors
-        plot_graph(G, title=f"After Step {step}: Simplified Parallel Resistors")
-
-        step += 1
-
-    # The final equivalent resistance is the only edge left in the graph
-    final_resistance = None
-    for edge in G.edges(data=True):
-        final_resistance = edge[2]['weight']
-
-    return final_resistance
-
-# Example usage: Create a circuit graph
-G = nx.Graph()
-
-# Adding resistors (edges) to the circuit
-# Resistor values: R1 = 6 ohms, R2 = 3 ohms, R3 = 4 ohms, R4 = 5 ohms, R5 = 2 ohms
-G.add_edge(1, 2, weight=6)  # R1
-G.add_edge(2, 3, weight=3)  # R2
-G.add_edge(3, 4, weight=4)  # R3
-G.add_edge(2, 5, weight=5)  # R4
-G.add_edge(4, 6, weight=2)  # R5
-
-# Call the function to calculate the equivalent resistance
-equivalent_resistance = calculate_equivalent_resistance(G)
-print(f"The equivalent resistance of the circuit is: {equivalent_resistance} ohms")
 
 </code></pre>
-<p><img alt="alt text" src="../image.png"/></p>
+<p><img alt="Alt text" src="../image-1.png"/></p>
+<p>This is a <strong>graph-based model</strong> of an electrical circuit, where:</p>
+<ul>
+<li><strong>Nodes (A, B, C, D)</strong> represent connection points.</li>
+<li><strong>Edges</strong> between nodes represent <strong>resistors</strong>, with resistance values written in <strong>Ohms (Ω)</strong>.</li>
+<li>The <strong>thickness</strong> of the connections is uniform, but edge labels show <strong>resistance values clearly in red</strong>.</li>
+</ul>
+<hr/>
+<h2 id="what-the-circuit-looks-like">What the Circuit Looks Like</h2>
+<ul>
+<li><strong>A</strong> is connected to <strong>C</strong> with a <strong>100 Ω</strong> resistor.</li>
+<li><strong>C</strong> is connected to <strong>D</strong> with a <strong>200 Ω</strong> resistor.</li>
+<li><strong>D</strong> is connected to <strong>B</strong> with a <strong>300 Ω</strong> resistor.</li>
+<li><strong>A</strong> is also connected directly to <strong>D</strong> with a <strong>150 Ω</strong> resistor.</li>
+<li><strong>C</strong> is connected directly to <strong>B</strong> with a <strong>50 Ω</strong> resistor.</li>
+</ul>
+<hr/>
+<h3 id="observations">Observations</h3>
+<ul>
+<li>Multiple paths exist from <strong>A</strong> to <strong>B</strong>.</li>
+<li>Some resistors might be in <strong>series</strong> or <strong>parallel</strong>.</li>
+<li>We can simplify the network <strong>step-by-step</strong>.</li>
+</ul>
+<hr/>
+<hr/>
+<h3 id="simplification-steps">Simplification Steps</h3>
+<ol>
+<li><strong>Series resistors</strong> are merged (added together).</li>
+<li><strong>Parallel resistors</strong> are combined using the formula:</li>
+</ol>
+<p>$$
+   \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
+   $$</p>
+<ol>
+<li>Keeps simplifying until only <strong>one equivalent resistor</strong> remains between start point <strong>A</strong> and end point <strong>B</strong>.</li>
+<li>Plots the <strong>final simplified circuit</strong>, showing only the equivalent resistor between <strong>A</strong> and <strong>B</strong>.</li>
+<li>Prints the <strong>final equivalent resistance</strong>.</li>
+</ol>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
