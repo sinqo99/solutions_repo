@@ -217,3 +217,50 @@ plt.show()
 ```
 
 ![alt text](image-16.png)
+
+# Understanding Orbital Trajectories - Simplified Explanation
+
+These four graphs show how objects (like satellites or rockets) move when they are launched from Earth. They help us understand how different speeds create different types of paths around or away from the Earth.
+
+---
+
+## Top Left: Orbital Paths Around Earth
+
+- This graph shows three types of paths:
+  - **Blue (Elliptical):** The object stays in orbit around Earth. It goes around in an oval shape.
+  - **Green (Parabolic):** The object just barely escapes Earth’s gravity. It follows a path that’s right on the edge between staying and escaping.
+  - **Red (Hyperbolic):** The object moves fast enough to escape Earth and never come back.
+- The **orange circle** is Earth. All the paths start near Earth and show what happens depending on how fast the object moves.
+
+---
+
+## Top Right: Escape Speed vs. Distance
+
+- This graph shows how fast an object needs to go to escape Earth’s gravity.
+- The farther away the object starts, the **less speed** it needs to escape.
+- This is because gravity gets weaker as you move away from Earth.
+
+---
+
+## Bottom Left: Velocity Vectors
+
+- This graph shows the **speed and direction** of the object at different points along its path.
+- Each arrow shows how the object is moving:
+  - **Elliptical (Blue):** The speed changes depending on how close it is to Earth.
+  - **Parabolic (Green):** The speed gradually decreases as it moves away.
+  - **Hyperbolic (Red):** The object keeps moving fast and doesn’t slow down much.
+
+---
+
+## Bottom Right: Distance from Earth Over Time
+
+- This graph shows how far the object is from Earth as time passes:
+  - **Elliptical (Blue):** The distance goes up and down. The object is in orbit and keeps coming back around.
+  - **Parabolic (Green):** The object keeps moving away, but slowly.
+  - **Hyperbolic (Red):** The object moves away quickly and keeps going farther and farther.
+
+---
+
+## Conclusion
+
+These graphs show how an object’s speed decides whether it stays around Earth or escapes into space. If it moves slowly, it stays in orbit. If it moves fast enough, it can escape. This is how satellites, space probes, and rockets behave depending on how much energy they are given at launch.
